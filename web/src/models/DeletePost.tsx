@@ -3,7 +3,7 @@ import './axiosExample.css'
 import React, { useEffect, useState } from 'react'
 import { PostType } from './post.interface';
 import {Post}  from '../api/api';
-import {Button as DevButton} from 'devextreme-react/Button';
+import {Button as DevButton} from 'devextreme-react/button';
 
 const DeletePost = () => {
     const [isError, setIsError] = useState<boolean>(false);

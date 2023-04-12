@@ -1,11 +1,11 @@
 import React ,{useState} from 'react'
-import Layout from '@client-layout';
+//import Layout from '@client-layout';
 import GetPost from '../../models/GetPost';
 import DeletePost from '../../models/DeletePost';
 import UpdatePost from '../../models/UpdatePost';
 import CreatePost from '../../models/CreatePost';
-import {Button as DevButton}from 'devextreme-react/Button';
 import TypeScriptLayout from '../../plugins/client3/TypeScriptLayout';
+import {Button as DevButton} from 'devextreme-react';
 
 
 function Quejas() {
@@ -35,13 +35,13 @@ function Quejas() {
               <DevButton onClick={() => setAction('post')}>Crear</DevButton>
               <DevButton onClick={() => setAction('delete')}>Eliminar</DevButton>
               <DevButton onClick={() => setAction('put')}>Modificar</DevButton>
-            </div>
+        </div>
 
             {showActionComponent()}
       </TypeScriptLayout>
 
-    )
-  }
+    );
+  };
   
   export default Quejas;
   

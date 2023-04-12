@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '@client-layout';
-import { Button } from 'devextreme-react/button';
-import { TextBox } from 'devextreme-react/text-box';
+
+import { Button  as DevButton, TextBox } from 'devextreme-react';
 
 function LoginPage() {
   return (
@@ -18,8 +18,8 @@ function LoginPage() {
               <label className="block mt-3"> Contraseña </label>
               <TextBox type="password" placeholder="Password" className="dx-field"/>
                 <div className="flex justify-between items-baseline">
-                  {/* <button type="submit" className="mt-4 bg-slate-500 text-white py-2 px-6 rounded-md hover:bg-slate-600 ">Login</button> */}
-                  <Button text="Login" className='mt-4 px-6' type='default'/>
+                    {/*<button type="submit" className="mt-4 bg-slate-500 text-white py-2 px-6 rounded-md hover:bg-slate-600 ">Login</button> */}
+                 <DevButton text="Login" className='mt-4 px-6' type='default'/>
                   <a href="#" className="text-sm hover:underline">Contraseña olvidada?</a>
                 </div>
             </div>

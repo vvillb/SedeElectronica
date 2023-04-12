@@ -1,12 +1,6 @@
 import React from 'react';
 //this layout will serve as a test to be more responsive
 //after finishong, it can be copied into the others
-import ResponsiveBox, {
-  Row,
-  Col,
-  Item,
-  Location,
-} from 'devextreme-react/responsive-box';
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Breadcrumbs from './components/Breadcrumbs';
@@ -16,6 +10,7 @@ import '../common/App.css'
 import './Style2.css'
 import 'devextreme/dist/css/dx.material.blue.light.css';
 
+// eslint-disable-next-line react/prop-types
 function Layout({children}) {
     
 

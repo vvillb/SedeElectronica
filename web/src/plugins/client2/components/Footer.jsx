@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'devextreme-react/button';
+import { Button} from 'devextreme-react/button';
 import { TextBox } from 'devextreme-react/text-box';
 
 function Footer() {

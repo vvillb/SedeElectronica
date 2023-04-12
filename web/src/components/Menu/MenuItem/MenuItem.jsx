@@ -1,7 +1,9 @@
 import React from 'react'
-import Menu, { Item } from 'devextreme-react/menu';
+
 import { useNavigate } from 'react-router-dom';
 import products from '@client-menuData'
+import { Menu } from 'devextreme-react';
+import { Item } from 'devextreme-react/accordion';
 
 
 
@@ -20,7 +22,7 @@ function MenuItem(props) {
 
     return (
             <div id="container">
-                <Menu  
+                <Menu
                     onItemClick={handleClick}
                     adaptivityEnabled={true}
                     orientation={props.orientation || 'horizontal'}
