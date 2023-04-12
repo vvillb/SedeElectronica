@@ -25,6 +25,7 @@ function MenuItem(props) {
                 <Menu
                     onItemClick={handleClick}
                     adaptivityEnabled={true}
+                    // eslint-disable-next-line react/prop-types
                     orientation={props.orientation || 'horizontal'}
                     >
                     {products.map((item) => (
