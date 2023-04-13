@@ -16,7 +16,6 @@ const responseBody = (response: AxiosResponse) => response.data;
 };
 export const Post = {
 	getPosts: (): Promise<PostType[]> => requests.get('posts'),
-	getAPost: (id: number): Promise<PostType> => requests.get(`posts/${id}`),
 	createPost: (post: PostType): Promise<PostType> =>
 		requests.post('posts', post),
 	updatePost: (post: PostType, id: number): Promise<PostType> =>
