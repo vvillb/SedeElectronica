@@ -1,15 +1,7 @@
 import React from 'react';
-//this layout will serve as a test to be more responsive
-//after finishong, it can be copied into the others
-import ResponsiveBox, {
-  Row,
-  Col,
-  Item,
-  Location,
-} from 'devextreme-react/responsive-box';
 import Header from './components/Header';
 import Menu from './components/Menu';
-import Breadcrumbs from './components/Breadcrumbs';
+// import Breadcrumbs from './components/Breadcrumbs';
 import Footer from './components/Footer';
 import '../common/index.css'
 import '../common/App.css'

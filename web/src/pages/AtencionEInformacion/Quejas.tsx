@@ -4,7 +4,7 @@ import GetPost from '../../models/GetPost';
 import DeletePost from '../../models/DeletePost';
 import UpdatePost from '../../models/UpdatePost';
 import CreatePost from '../../models/CreatePost';
-import TypeScriptLayout from '../../plugins/client3/TypeScriptLayout';
+import TypeScriptLayout from '@client-TypeScriptLayout';
 import {Button as DevButton} from 'devextreme-react';
 
 

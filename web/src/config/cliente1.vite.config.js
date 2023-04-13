@@ -18,7 +18,9 @@ export default defineConfig({
         alias:{
           '@client-layout':path.resolve(__dirname,'../plugins/client1/Layout.jsx'),
           '@client-i18n_es':path.resolve(__dirname,'../../src/plugins/client1/i18n/es/client.json'),
-          '@client-menuData':path.resolve(__dirname,'../../src/plugins/client1/components/data/Data.jsx')
+          '@client-menuData':path.resolve(__dirname,'../../src/plugins/client1/components/data/Data.jsx'),
+          '@client-TypeScriptLayout':path.resolve(__dirname,'../plugins/client1/TypeScriptLayout.tsx'),
+
       }
     }
 })
