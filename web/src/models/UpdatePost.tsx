@@ -36,15 +36,15 @@ const UpdatePost = () => {
 
     return (
         <div className='axiosExample'>
-            <h1 className='axiosExample' >Actualizar publicación</h1><br />
-            <h2 className='axiosExample' >Haz click en una trajeta</h2>
+            <h2 className='axiosExample' >Actualizar publicación</h2><br />
+            <h4 className='axiosExample' >Haz click en una trajeta</h4>
             <div className='gridAxios'>
                 {
                     posts.map(post => (
                         <div className='axiosExample' key={post.id} onClick={() => handleUpdate(post.id)}>
                             <p className='axiosExample'>Título: <span className='axiosExample'>{post.title}</span></p>
                             <p className='axiosExample'> <span className='axiosExample'>{post.body}</span></p>
-                            <p className='axiosExample'>Autor: <span className='axiosExample'>{post.userId}</span></p>
+                            <p className='axiosExample'> <span className='axiosExample'>{post.date}</span></p>
                         </div>
                     ))
                 }

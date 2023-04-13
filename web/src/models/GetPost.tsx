@@ -25,8 +25,8 @@ const GetPost = () => {
     }, []);
     return (
         <>
-            <h1 className='axiosExample'>Leer publicación</h1><br />
-            <h2 className='axiosExample'>lista de publicaciones</h2>
+            <h2 className='axiosExample'>Leer publicación</h2><br />
+            <h3 className='axiosExample'>lista de publicaciones</h3>
 
             <div className='gridAxios'>
                 {

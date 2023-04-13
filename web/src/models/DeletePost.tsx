@@ -28,7 +28,7 @@ const DeletePost = () => {
     
   return (
     <div className='axiosExample'>
-            <h1 className='axiosExample'>Eliminar queja</h1> <br />
+            <h2 className='axiosExample'>Eliminar queja</h2> <br />
             
             <div className="gridAxios">
                 {
