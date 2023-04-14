@@ -111,10 +111,11 @@ namespace TodoApi.Controllers
 
             return NoContent();
         }
-
+//C:/Users/virgi/.dotnet/tools/httprepl https://localhost:5262/api/todoitems
         private bool TodoItemExists(long id)
         {
             return (_context.TodoItems?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
+//httprepl https://localhost:7175/api/todoitems --openapi https://localhost:7175/swagger/v1/swagger.json
