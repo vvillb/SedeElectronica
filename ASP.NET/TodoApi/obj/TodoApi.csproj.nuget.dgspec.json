@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\virgi\\Documents\\GitHub\\SedeElectronica\\asp.net\\todoapi\\TodoApi.csproj": {}
+    "C:\\gitHub\\SEDE\\asp.net\\todoapi\\TodoApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\virgi\\Documents\\GitHub\\SedeElectronica\\asp.net\\todoapi\\TodoApi.csproj": {
+    "C:\\gitHub\\SEDE\\asp.net\\todoapi\\TodoApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\virgi\\Documents\\GitHub\\SedeElectronica\\asp.net\\todoapi\\TodoApi.csproj",
+        "projectUniqueName": "C:\\gitHub\\SEDE\\asp.net\\todoapi\\TodoApi.csproj",
         "projectName": "TodoApi",
-        "projectPath": "C:\\Users\\virgi\\Documents\\GitHub\\SedeElectronica\\asp.net\\todoapi\\TodoApi.csproj",
-        "packagesPath": "C:\\Users\\virgi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\virgi\\Documents\\GitHub\\SedeElectronica\\asp.net\\todoapi\\obj\\",
+        "projectPath": "C:\\gitHub\\SEDE\\asp.net\\todoapi\\TodoApi.csproj",
+        "packagesPath": "C:\\Users\\virginia.villalobos\\.nuget\\packages\\",
+        "outputPath": "C:\\gitHub\\SEDE\\asp.net\\todoapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\virgi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\virginia.villalobos\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -80,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     }
