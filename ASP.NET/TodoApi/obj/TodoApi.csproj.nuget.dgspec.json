@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\gitHub\\SEDE\\asp.net\\todoapi\\TodoApi.csproj": {}
+    "C:\\gitHub\\SEDE\\ASP.NET\\TodoApi\\TodoApi.csproj": {}
   },
   "projects": {
-    "C:\\gitHub\\SEDE\\asp.net\\todoapi\\TodoApi.csproj": {
+    "C:\\gitHub\\SEDE\\ASP.NET\\TodoApi\\TodoApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\gitHub\\SEDE\\asp.net\\todoapi\\TodoApi.csproj",
+        "projectUniqueName": "C:\\gitHub\\SEDE\\ASP.NET\\TodoApi\\TodoApi.csproj",
         "projectName": "TodoApi",
-        "projectPath": "C:\\gitHub\\SEDE\\asp.net\\todoapi\\TodoApi.csproj",
+        "projectPath": "C:\\gitHub\\SEDE\\ASP.NET\\TodoApi\\TodoApi.csproj",
         "packagesPath": "C:\\Users\\virginia.villalobos\\.nuget\\packages\\",
-        "outputPath": "C:\\gitHub\\SEDE\\asp.net\\todoapi\\obj\\",
+        "outputPath": "C:\\gitHub\\SEDE\\ASP.NET\\TodoApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\virginia.villalobos\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -59,6 +63,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.29.0, )"
             }
           },
           "imports": [

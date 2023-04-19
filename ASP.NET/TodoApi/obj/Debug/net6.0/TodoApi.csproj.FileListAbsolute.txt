@@ -568,3 +568,4 @@ C:\gitHub\SEDE\asp.net\todoapi\obj\Debug\net6.0\refint\TodoApi.dll
 C:\gitHub\SEDE\asp.net\todoapi\obj\Debug\net6.0\TodoApi.pdb
 C:\gitHub\SEDE\asp.net\todoapi\obj\Debug\net6.0\TodoApi.genruntimeconfig.cache
 C:\gitHub\SEDE\asp.net\todoapi\obj\Debug\net6.0\ref\TodoApi.dll
+C:\gitHub\SEDE\ASP.NET\TodoApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
