@@ -14,7 +14,9 @@ function Header() {
 
            <div className="w-full">
             
-              <div className="relative z-1 h-32 mx-auto px-5 max-w-7xl flex items-center justify-between">
+              <div className="relative z-1 h-32 mx-auto px-5 max-w-7xl flex items-center justify-end">
+
+               
 
                  {/*  <a className="textHeader" href="/">Entidad 1</a>
 
