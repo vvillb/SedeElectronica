@@ -13,7 +13,7 @@ export const userSlice = createSlice({
         },
         setLoginUser: ( state, action ) => {
             state.isLoading = false;
-            state.user = action.payload.user;
+            state.user = action.payload;
            
         }
     }
