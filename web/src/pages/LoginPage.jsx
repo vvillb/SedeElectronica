@@ -1,19 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '@client-layout';
 import futufirma from '../utils/futufirma'
+import { useDispatch } from 'react-redux';
+import { getLoginUser } from '../../store/user/slices/user/thunks';
 
 
 import { Button  as DevButton, TextBox } from 'devextreme-react';
 
 function LoginPage() {
+  // const [certificadoFirma, setCertificadoFirma]="";
+  // const [mensaje, setMensaje]="";
+
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch( setLoginUser(certificadoFirma, mensaje) );    
+  // }, [])
 
   function futufirmaVersionRecibida(mensaje) {
     console.log('futufirmaVersionRecibida: ', mensaje)
 
   }
 
-  function futufirmaAutenticacionRecibida(datos) {
-    console.log('futufirmaAutenticacionRecibida: ', datos)
+  const futufirmaAutenticacionRecibida=(datos)=> {
+    console.log('futufirmaAutenticacionRecibida: ');
+    //  setCertificadoFirma  (datos.certificadoFirma);
+    //  setMensaje(datos.firma);
+    dispatch( getLoginUser(datos.certificadoFirma, datos.firma) )
+    
+     //aqui pasar dat y ya en wel thunk paso los que me interesas
+  //import loginuser y pasar datos.atr1 y 2   
 }
 
   function noInstalado() {
