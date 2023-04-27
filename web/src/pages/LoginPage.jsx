@@ -1,21 +1,22 @@
 import React, { useEffect } from 'react'
 import Layout from '@client-layout';
 import futufirma from '../utils/futufirma'
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector} from 'react-redux';
 import { getLoginUser } from '../../store/user/slices/user/thunks';
+import { setLogoutUser } from '../../store/user/slices/user/userSlice';
+
 
 
 import { Button  as DevButton, TextBox } from 'devextreme-react';
 
 function LoginPage() {
-  // const [certificadoFirma, setCertificadoFirma]="";
-  // const [mensaje, setMensaje]="";
+  
+  // const {user} = useSelector(state => state.user);
+  const {  autenticado,user } = useSelector((state) => state.user)
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch( setLoginUser(certificadoFirma, mensaje) );    
-  // }, [])
+ 
 
   function futufirmaVersionRecibida(mensaje) {
     console.log('futufirmaVersionRecibida: ', mensaje)
@@ -24,12 +25,10 @@ function LoginPage() {
 
   const futufirmaAutenticacionRecibida=(datos)=> {
     console.log('futufirmaAutenticacionRecibida: ');
-    //  setCertificadoFirma  (datos.certificadoFirma);
-    //  setMensaje(datos.firma);
+   
     dispatch( getLoginUser(datos.certificadoFirma, datos.firma) )
     
-     //aqui pasar dat y ya en wel thunk paso los que me interesas
-  //import loginuser y pasar datos.atr1 y 2   
+   
 }
 
   function noInstalado() {
@@ -41,6 +40,10 @@ function LoginPage() {
     futufirma.onRespuesta = futufirmaAutenticacionRecibida;
     futufirma.autenticar();
   }
+  const logout = () => {
+    dispatch(setLogoutUser());
+    console.log("usuario auteticado:", autenticado)
+  };
 
   const version = () => {
     futufirma.onRespuesta = futufirmaVersionRecibida;
@@ -56,9 +59,26 @@ function LoginPage() {
 
   return (
     <Layout>
-        <DevButton className='mt-4 px-6 flex flex-end' type='default' onClick={autenticar}>
+      <>
+        <div>
+        <span>
+          {autenticado?`Hola, ${user.nombre}!`:"Para acceder con futufirma debes autenticarte"}
+        </span>
+        <div>
+          {autenticado?(
+            <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={logout}>
+            Logout
+            </DevButton> 
+          ):(
+            <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={ autenticar}>
             Autenticarse
-          </DevButton>
+            </DevButton> 
+          )}
+          </div>
+         
+        
+        
+          </div>
         <div className="relative py-3 sm:w-96 mx-auto text-center">
            
           <span className="text-2xl font-light ">Login to your account</span>
@@ -79,7 +99,7 @@ function LoginPage() {
       
         </div>
       </div>
-
+</>
     </Layout>    
   )
 }

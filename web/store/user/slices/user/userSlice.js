@@ -6,6 +6,7 @@ export const userSlice = createSlice({
        
         user: "",
         isLoading: false,
+        autenticado:false,
     },
     reducers: {
         startLoadingUsers: (state, /* action */ ) => {
@@ -14,11 +15,17 @@ export const userSlice = createSlice({
         setLoginUser: ( state, action ) => {
             state.isLoading = false;
             state.user = action.payload;
+            state.autenticado=true;
            
-        }
+        },
+        setLogoutUser: (state) => {
+            state.user = "";
+            state.isLoading = false;
+            state.autenticado = false;
+        },
     }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { startLoadingUsers, setLoginUser } = userSlice.actions;
+export const { startLoadingUsers, setLoginUser , setLogoutUser} = userSlice.actions;
