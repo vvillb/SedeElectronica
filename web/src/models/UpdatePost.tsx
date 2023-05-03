@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Post } from '../api/api';
+import { Post } from '../pruebas/api/api';
 import { PostType } from './post.interface';
 
 const UpdatePost = () => {

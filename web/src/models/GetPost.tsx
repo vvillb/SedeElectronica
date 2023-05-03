@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './axiosExample.css'
 import { PostType } from './post.interface';
-import {Post}  from '../api/api';
+import {Post}  from '../pruebas/api/api';
 //import { Post } from '../api/api';
 
 

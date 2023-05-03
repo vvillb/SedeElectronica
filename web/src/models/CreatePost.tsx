@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { PostType } from './post.interface';
-import { Post } from '../api/api';
+import { Post } from '../pruebas/api/api';
 
 const CreatePost = () => {
 

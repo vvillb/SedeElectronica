@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { PostType } from '../models/post.interface';
+import { PostType } from '../../models/post.interface';
 
 const instance = axios.create({
 	baseURL: 'http://jsonplaceholder.typicode.com/',
