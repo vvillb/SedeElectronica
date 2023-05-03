@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, unstable_HistoryRouter } from 'react-router-dom';
 import { clearBreadcrumbs } from '../../../../store/breadcrumbs/slices/breadcrumbSlice';
 
-
 function Breadcrumbs() {
   const dispatch = useDispatch();
   // const history = unstable_HistoryRouter();
-
 
   useEffect(() => {
     const handlePopState = () => {
@@ -22,32 +20,29 @@ function Breadcrumbs() {
   }, [dispatch]);
 
   const breadcrumbs = useSelector((state) => state.breadcrumbs);
+
   return (
-    <>
-    <div>
-    {/* Botón navegación de React Router */}
-    <Link to="/">Ir a la página anterior</Link>
+    <div className="flex items-center bg-gray-800 py-2 px-4">
+      {/* Botón navegación de React Router */}
+      <Link to="/" className="text-gray-300 hover:text-gray-500">Ir a la página anterior</Link>
 
-    {/* Botón personalizado
-    <button onClick={() => history.goBack()}>Atrás</button>*/}
-  </div> 
-
-
-<nav className="w-full pl-32 py-2 dx-theme-as-background-color">
-  <ol>
-  {breadcrumbs.map((item, index) => (
-
-    <span key={index}>
-      <Link to={item.path}>
-      {item.path}</Link>
-    
-    </span>
-        ))}
-    </ol>
-  </nav>
-  </>
-    
+      {/* Botón personalizado
+      <button onClick={() => history.goBack()}>Atrás</button>*/}
+      
+      <nav className="w-full pl-32">
+        <ol>
+          {breadcrumbs.map((item, index) => (
+            <span key={index}>
+              <Link to={item.path} className="text-gray-300 hover:text-gray-500">
+                {item.path}
+              </Link>
+              {index < breadcrumbs.length - 1 && <span className="text-gray-300 mx-2">&gt;</span>}
+            </span>
+          ))}
+        </ol>
+      </nav>
+    </div>
   )
 }
 
-export default Breadcrumbs
+export default Breadcrumbs;
