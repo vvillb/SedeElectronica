@@ -1,7 +1,8 @@
 
 const products = [{
     id: '1',
-    name: 'Atención e información (1)',
+    path:'/atencion',
+    name: 'Atención e información ',
     subItems: [{
       id: '1_1',
       name: 'Catálogo de trámites',
@@ -25,6 +26,7 @@ const products = [{
     },],
   }, {
     id: '2',
+    path:'/services',
     name: 'Carpeta ciudadana',
     subItems: [{
       id: '2_1',
@@ -46,8 +48,14 @@ const products = [{
       name: 'Mis notificaciones',
       icon: 'key',
       path:'/CarpetaCiudadana/MisNotificaciones'
-    },],
-   }];
+    },
+    
+    ],
+   },
+    {
+      id: '3',
+      path:'/documentos',
+      name: 'Documentos'},];
 
 
 

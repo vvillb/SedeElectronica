@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Layout from '@client-layout';
 import futufirma from '../utils/futufirma'
 import { useDispatch , useSelector} from 'react-redux';
@@ -7,8 +7,9 @@ import { setLogoutUser } from '../../store/user/slices/user/userSlice';
 
 
 
-import { Button  as DevButton, TextBox } from 'devextreme-react';
+import { Button  as DevButton } from 'devextreme-react';
 import RegisterForm from '../plugins/common/registerForm';
+import { addBreadcrumbs, clearBreadcrumbs } from '../../store/breadcrumbs/slices/breadcrumbSlice';
 
 function LoginPage() {
   
@@ -17,7 +18,12 @@ function LoginPage() {
 
   const dispatch = useDispatch();
 
- 
+
+    //limpiar la navegación si es una página de raíz:
+    dispatch(clearBreadcrumbs());
+    //introducir un elemento
+    const label='Nueva página';
+    dispatch(addBreadcrumbs({label}))
 
   function futufirmaVersionRecibida(mensaje) {
     console.log('futufirmaVersionRecibida: ', mensaje)
@@ -46,6 +52,7 @@ function LoginPage() {
     console.log("usuario auteticado:", autenticado)
   };
 
+  // eslint-disable-next-line no-unused-vars
   const version = () => {
     futufirma.onRespuesta = futufirmaVersionRecibida;
     futufirma.version()

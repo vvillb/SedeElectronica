@@ -3,19 +3,38 @@ import { createSlice } from '@reduxjs/toolkit';
 export const breadcrumbSlice = createSlice({
   name: 'breadcrumb',
   initialState: [],
-  reducers: {
-    pushRoute: (state, action) => {
-      state.push(action.payload);
+  reducers:{
+    addBreadcrumbs(state,action){
+      const{label}=action.payload;
+      const path=window.location.pathname;
+      state.push({path,label});
     },
-    popBreadcrumb: (state) => {
-        state.pop();
-  },
-  clearBreadcrumbs: (state) => {
-    state = [];
-  },
-},
-});
+    clearBreadcrumbs(state){
+      state.splice(0,state.length);
+    },
+    popBreadcrumb(state) {
+      state.pop();
+    },
 
-export const { pushRoute, popBreadcrumb, clearBreadcrumbs  } = breadcrumbSlice.actions;
+    }
+  });
+
+
+
+
+//   reducers: {
+//     pushRoute: (state, action) => {
+//       state.push(action.payload);
+//     },
+//     popBreadcrumb: (state) => {
+//         state.pop();
+//   },
+//   clearBreadcrumbs: (state) => {
+//     state = [];
+//   },
+// },
+// });
+
+export const { addBreadcrumbs, popBreadcrumb, clearBreadcrumbs  } = breadcrumbSlice.actions;
 
 export default breadcrumbSlice.reducer;

@@ -1,6 +1,7 @@
 const products = [{
     id: '1',
     name: 'Atención e información (2)',
+    path:'/index',
     subItems: [{
       id: '1_1',
       name: 'Catálogo de trámites',
@@ -25,6 +26,7 @@ const products = [{
   }, {
     id: '2',
     name: 'Carpeta ciudadana',
+    path:'/services',
     subItems: [{
       id: '2_1',
       name: 'Mis documentos ',

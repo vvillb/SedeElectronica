@@ -17,7 +17,7 @@ AsyncRule,
 } from 'devextreme-react/validator';
 
 import notify from 'devextreme/ui/notify';
-import service from './data.js';
+import service from './data.jsx';
 
 class RegisterForm extends React.Component {
 constructor(props) {

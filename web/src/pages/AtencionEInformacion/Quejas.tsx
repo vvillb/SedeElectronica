@@ -6,9 +6,19 @@ import UpdatePost from '../../models/UpdatePost';
 import CreatePost from '../../models/CreatePost';
 import TypeScriptLayout from '@client-TypeScriptLayout';
 import {Button as DevButton} from 'devextreme-react';
+import { useDispatch } from 'react-redux';
+import { addBreadcrumbs } from '../../../store/breadcrumbs/slices/breadcrumbSlice';
 
 
 function Quejas() {
+  const dispatch = useDispatch();
+
+ 
+  //introducir un elemento
+  const label='Nueva página';
+  
+  dispatch(addBreadcrumbs({label}))
+
     
   const [action, setAction] = useState('get');
   

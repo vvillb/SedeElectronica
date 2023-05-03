@@ -17,8 +17,8 @@ import ServicesPage from '../pages/ServicesPage'
 function AppRouter() {
   return (
         <Routes>
-            <Route path='/docu' element={<DocumentsCheck/>}/> 
-            <Route path='/index' element={<IndexPage/>}/> 
+            <Route path='/documentos' element={<DocumentsCheck/>}/> 
+            <Route path='/atencion' element={<IndexPage/>}/> 
             <Route path='*' element={<LoginPage/>}/> 
             <Route path='/services' element={<ServicesPage/>}/> 
             <Route path='/AtencionEInformacion/Catalogo' element={<Catalogo/>}/>

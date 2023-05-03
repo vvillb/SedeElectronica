@@ -7,6 +7,7 @@ import '../common/index.css'
 import '../common/App.css'
 import './Style1.css'
 import 'devextreme/dist/css/dx.greenmist.css';
+import Breadcrumbs from './components/Breadcrumbs';
 
 function Layout({children}) {
     
@@ -27,7 +28,9 @@ function Layout({children}) {
 {/*       <div>
         <Breadcrumbs/>
       </div>
- */}
+ */}<div>
+  <Breadcrumbs/>
+ </div>
       <div className="flex-grow flex">
         <nav className="w-48 hidden sm:visible sm:block dx-theme-border-color-as-background-color">
           <Menu orientation='vertical'/>
