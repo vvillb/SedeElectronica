@@ -247,7 +247,9 @@ confirmPassword: e.value,
 }
 
 onFormSubmit(e) {
+  console.log("prueba form",e),
 notify({
+  
 message: 'You have submitted the form',
 position: {
 my: 'center top',

@@ -6,11 +6,12 @@ import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadc
 import { getDocument } from '../../store/user/slices/documents/thunks';
 import { SimpleItem } from 'devextreme-react/form';
 import { Form } from 'devextreme-react/data-grid';
-import { Button } from 'devextreme-react';
+import { Button, TextBox } from 'devextreme-react';
 
 
 
 function DocumentsCheck() {
+  const [inputValue, setInputValue] = useState('');
   const{t}=useTranslation('common');
   const dispatch = useDispatch();
   // const [searchTerm, setSearchTerm] = useState('');
@@ -22,13 +23,13 @@ function DocumentsCheck() {
   dispatch(addBreadcrumbs({label}))
 
   // Handle search button click
-  // const handleSearch = () => {
-  //   dispatch(getDocument(searchTerm));
-  // };
-
   const handleButtonClick = () => {
-    dispatch(getDocument('C14CAA93-D308-42AB-ABB2-FEE62205B419'));
-  };
+     dispatch(getDocument(inputValue));
+   };
+
+  // const handleButtonClick = () => {
+  //   dispatch(getDocument('C14CAA93-D308-42AB-ABB2-FEE62205B419'));
+  // };
 
 
     const { contenidoPDF  } = useSelector((state) => state.document.contenidoPDF) 
@@ -44,8 +45,18 @@ function DocumentsCheck() {
         <h3>{t('documents.client',{ns:'client'})}</h3>
     </div>
     <div id="container">
-    <Button onClick={handleButtonClick}>Buscar documento</Button>
+    <div className="dx-fieldset">
+          <div className="dx-field">
+            <div className="dx-field-label">Buscar documentos</div>
+            <div className="dx-field-value">
+              <TextBox value={inputValue} onValueChanged={(e) => setInputValue(e.value) } defaultValue="" />
+            </div>
+          </div>
+          </div>
+    <Button type="default"  useSubmitBehavior={true} onClick={handleButtonClick}>buscar</Button>
  
+
+
     {/* <Form formData={searchTerm} readOnly={false}>
           <SimpleItem
             dataField="searchTerm"
