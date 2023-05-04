@@ -10,7 +10,7 @@ export const getDocument = (objetoBusqueda) => {
         console.log("test thunk")
       
  
-        try{ const { data } = await documentApi.get(`/Documentos/CotejoDocumento/{$objetoBusqueda}`);  
+        try{ const { data } = await documentApi.get(`/Documentos/CotejoDocumento/${objetoBusqueda}`);  
           dispatch(setDocument(data));
 
          

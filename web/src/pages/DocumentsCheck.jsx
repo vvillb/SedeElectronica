@@ -13,7 +13,7 @@ import { Button } from 'devextreme-react';
 function DocumentsCheck() {
   const{t}=useTranslation('common');
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState('');
+  // const [searchTerm, setSearchTerm] = useState('');
 
   //limpiar la navegación si es una página de raíz:
    dispatch(clearBreadcrumbs());
@@ -22,8 +22,12 @@ function DocumentsCheck() {
   dispatch(addBreadcrumbs({label}))
 
   // Handle search button click
-  const handleSearch = () => {
-    dispatch(getDocument(searchTerm));
+  // const handleSearch = () => {
+  //   dispatch(getDocument(searchTerm));
+  // };
+
+  const handleButtonClick = () => {
+    dispatch(getDocument('C14CAA93-D308-42AB-ABB2-FEE62205B419'));
   };
 
 
@@ -40,7 +44,9 @@ function DocumentsCheck() {
         <h3>{t('documents.client',{ns:'client'})}</h3>
     </div>
     <div id="container">
-    <Form formData={searchTerm} readOnly={false}>
+    <Button onClick={handleButtonClick}>Buscar documento</Button>
+ 
+    {/* <Form formData={searchTerm} readOnly={false}>
           <SimpleItem
             dataField="searchTerm"
             editorType="dxTextBox"
@@ -55,7 +61,7 @@ function DocumentsCheck() {
             text="Buscar documento"
             onClick={handleSearch}
           />
-        </Form>
+        </Form> */}
             </div>
   </Layout>
   )
