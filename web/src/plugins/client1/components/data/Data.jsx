@@ -26,7 +26,7 @@ const products = [{
     },],
   }, {
     id: '2',
-    path:'/services',
+    path:'/CarpetaCiudadana',
     name: 'Carpeta ciudadana',
     subItems: [{
       id: '2_1',

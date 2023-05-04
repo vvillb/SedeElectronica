@@ -1,13 +1,13 @@
 import React ,{useState} from 'react'
 //import Layout from '@client-layout';
-import GetPost from '../../models/GetPost';
-import DeletePost from '../../models/DeletePost';
-import UpdatePost from '../../models/UpdatePost';
-import CreatePost from '../../models/CreatePost';
+import GetPost from '../models/GetPost';
+import DeletePost from '../models/DeletePost';
+import UpdatePost from '../models/UpdatePost';
+import CreatePost from '../models/CreatePost';
 import TypeScriptLayout from '@client-TypeScriptLayout';
 import {Button as DevButton} from 'devextreme-react';
 import { useDispatch } from 'react-redux';
-import { addBreadcrumbs } from '../../../store/breadcrumbs/slices/breadcrumbSlice';
+import { addBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
 
 
 function Quejas() {

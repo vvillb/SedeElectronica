@@ -9,7 +9,7 @@ import { setLogoutUser } from '../../store/user/slices/user/userSlice';
 
 import { Button  as DevButton } from 'devextreme-react';
 import RegisterForm from '../plugins/common/registerForm';
-import { addBreadcrumbs, clearBreadcrumbs } from '../../store/breadcrumbs/slices/breadcrumbSlice';
+import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
 
 function LoginPage() {
   

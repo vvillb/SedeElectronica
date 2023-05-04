@@ -7,7 +7,7 @@ export const breadcrumbSlice = createSlice({
     addBreadcrumbs(state,action){
       const{label}=action.payload;
       const path=window.location.pathname;
-      if (!(state.lenght>0 && state[state.lenght - 1].path===path)){
+      if (!(state.length>0 && state[state.length - 1].path===path)){
         state.push({path,label});
       }
     },
@@ -16,27 +16,8 @@ export const breadcrumbSlice = createSlice({
     },
     popBreadcrumb(state) {
       state.pop();
-    },
-
-    }
-  });
-
-
-
-
-//   reducers: {
-//     pushRoute: (state, action) => {
-//       state.push(action.payload);
-//     },
-//     popBreadcrumb: (state) => {
-//         state.pop();
-//   },
-//   clearBreadcrumbs: (state) => {
-//     state = [];
-//   },
-// },
-// });
-
+    },}});
+    
 export const { addBreadcrumbs, popBreadcrumb, clearBreadcrumbs  } = breadcrumbSlice.actions;
 
 export default breadcrumbSlice.reducer;

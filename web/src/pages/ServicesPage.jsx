@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '@client-layout';
-import { addBreadcrumbs, clearBreadcrumbs } from '../../store/breadcrumbs/slices/breadcrumbSlice';
+import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import { useDispatch } from 'react-redux';
 // import { useDispatch } from 'react-redux';
 // import pushBreadcrumb from '../../store/breadcrumbs';

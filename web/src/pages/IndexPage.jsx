@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '@client-layout';
 import { useDispatch } from 'react-redux';
-import { addBreadcrumbs, clearBreadcrumbs } from '../../store/breadcrumbs/slices/breadcrumbSlice';
+import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import { Menu } from 'devextreme-react';
 import { useNavigate } from 'react-router-dom';
 import { Item } from 'devextreme-react/accordion';

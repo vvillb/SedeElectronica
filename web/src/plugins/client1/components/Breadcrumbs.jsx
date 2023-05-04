@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, unstable_HistoryRouter } from 'react-router-dom';
-import { clearBreadcrumbs } from '../../../../store/breadcrumbs/slices/breadcrumbSlice';
+import { clearBreadcrumbs } from '../../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 
 function Breadcrumbs() {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ function Breadcrumbs() {
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [dispatch]);
+  }, []);
 
   const breadcrumbs = useSelector((state) => state.breadcrumbs);
 
@@ -36,7 +36,7 @@ function Breadcrumbs() {
               <Link to={item.path} className="text-gray-300 hover:text-gray-500">
                 {item.path}
               </Link>
-              {index < breadcrumbs.length - 1 && <span className="text-gray-300 mx-2">&gt;</span>}
+              {index < breadcrumbs.length - 1 && <span className="text-gray-300 mx-2"></span>}
             </span>
           ))}
         </ol>

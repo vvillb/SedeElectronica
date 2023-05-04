@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '@client-layout';
 import { useDispatch } from 'react-redux';
-import { addBreadcrumbs } from '../../../store/breadcrumbs/slices/breadcrumbSlice';
+import { addBreadcrumbs } from '../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 
 
 function MisSolicitudes() {

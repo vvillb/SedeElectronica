@@ -20,7 +20,7 @@ function AppRouter() {
             <Route path='/documentos' element={<DocumentsCheck/>}/> 
             <Route path='/atencion' element={<IndexPage/>}/> 
             <Route path='*' element={<LoginPage/>}/> 
-            <Route path='/services' element={<ServicesPage/>}/> 
+            <Route path='/CarpetaCiudadana' element={<ServicesPage/>}/> 
             <Route path='/AtencionEInformacion/Catalogo' element={<Catalogo/>}/>
             <Route path='/AtencionEInformacion/Quejas' element={<Quejas/>}/>
             <Route path='/AtencionEInformacion/Tablon' element={<Tablon/>}/>
