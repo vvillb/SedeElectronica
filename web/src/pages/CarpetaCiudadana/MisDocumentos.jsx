@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '@client-layout';
 import { addBreadcrumbs } from '../../../store/breadcrumbs/slices/breadcrumbSlice';
 import { useDispatch } from 'react-redux';
@@ -6,13 +6,17 @@ import { useDispatch } from 'react-redux';
 
 function MisDocumentos() {
 
+
   const dispatch = useDispatch();
 
 
     //introducir un elemento
     const label='Nueva página';
+
+    useEffect(() => {
     dispatch(addBreadcrumbs({label}))
-  
+    console.log('añadir miga')
+  }, [dispatch]);
 
     return (
       <Layout>

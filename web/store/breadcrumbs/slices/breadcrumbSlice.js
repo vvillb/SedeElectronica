@@ -7,7 +7,9 @@ export const breadcrumbSlice = createSlice({
     addBreadcrumbs(state,action){
       const{label}=action.payload;
       const path=window.location.pathname;
-      state.push({path,label});
+      if (!(state.lenght>0 && state[state.lenght - 1].path===path)){
+        state.push({path,label});
+      }
     },
     clearBreadcrumbs(state){
       state.splice(0,state.length);
