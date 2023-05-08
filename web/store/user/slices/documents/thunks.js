@@ -1,4 +1,5 @@
-import { documentApi  } from '../../apis/DocumentApi';
+
+import axiosService from '../../../../src/services/axiosService';
 import { setDocument } from './documentSlice';
 
 
@@ -7,10 +8,10 @@ import { setDocument } from './documentSlice';
 export const getDocument = (objetoBusqueda) => {
     return async( dispatch, getState ) => {
         
-        console.log("test thunk")
+        console.log(axiosService)
       
  
-        try{ const { data } = await documentApi.get(`/Documentos/CotejoDocumento/${objetoBusqueda}`);  
+        try{ const { data } = await axiosService.axiosInstance.get(`/Documentos/CotejoDocumento/${objetoBusqueda}`);  
           dispatch(setDocument(data));
 
          

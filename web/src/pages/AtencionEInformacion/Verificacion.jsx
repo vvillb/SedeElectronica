@@ -1,25 +1,46 @@
 import React from 'react'
 import Layout from '@client-layout';
-import { useDispatch } from 'react-redux';
-import { addBreadcrumbs } from '../../../store/user/slices/breadcrumbs/breadcrumbSlice';
-
+import {useTranslation} from 'react-i18next'
+import { useState } from 'react';
+import DocumentosService from '../../services/DocumentosServices/documentosServices';
 
 function Verificacion() {
-  const dispatch = useDispatch();
+  const{t}=useTranslation('common');
 
- 
-  //introducir un elemento
-  const label='Nueva página';
-  
-  dispatch(addBreadcrumbs({label}))
+  const [consulta, setConsulta] = useState('')
+  const [respuesta, setRespuesta] = useState('')
 
-    return (
-      <Layout>
-          <div>
-           <h1>Verificación de documentos</h1>
-          </div>
-      </Layout>
-    )
-  }
-  
-  export default Verificacion;
+  const service = new DocumentosService()
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const {data} = await service.checkDocumento(consulta)
+      if (data.contenidoPDF){
+        setRespuesta(data.contenidoPDF)
+        // TODO: en este punto se podría quitar la variable reactiva "respuesta" y llamar al método de descarga
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  return (
+    <Layout>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="consulta">Documento:</label>
+        <input type="text" id="consulta" value={consulta} onChange={event => setConsulta(event.target.value)} />
+        <button type="submit">Consultar documento</button>
+      </div>
+      <div>
+        <label htmlFor="texto">Respuesta:</label>   
+        {respuesta}
+      </div>
+      
+    </form>
+    </Layout>
+  );
+}
+
+export default Verificacion;

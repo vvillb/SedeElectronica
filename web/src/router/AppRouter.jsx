@@ -3,7 +3,6 @@ import {Routes, Route} from 'react-router-dom'
 import Catalogo from '../pages/AtencionEInformacion/Catalogo'
 import Quejas from '../pages/AtencionEInformacion/Quejas'
 import Tablon from '../pages/AtencionEInformacion/Tablon'
-import Verificacion from '../pages/AtencionEInformacion/Verificacion'
 import MisDocumentos from '../pages/CarpetaCiudadana/MisDocumentos'
 import MisExpedientes from '../pages/CarpetaCiudadana/MisExpedientes'
 import MisNotificaciones from '../pages/CarpetaCiudadana/MisNotificaciones'
@@ -12,6 +11,7 @@ import DocumentsCheck from '../pages/DocumentsCheck'
 import IndexPage from '../pages/IndexPage'
 import LoginPage from '../pages/LoginPage'
 import ServicesPage from '../pages/ServicesPage'
+import Verificacion from '../pages/AtencionEInformacion/Verificacion'
 
 
 function AppRouter() {
