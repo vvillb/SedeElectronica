@@ -26,15 +26,13 @@ function DocumentsCheck() {
   // Handle search button click
   const handleButtonClick = () => {
      dispatch(getDocument(inputValue));
+
    };
 
-  // const handleButtonClick = () => {
-  //   dispatch(getDocument('C14CAA93-D308-42AB-ABB2-FEE62205B419'));
-  // };
 
 
-    const { contenidoPDF  } = useSelector((state) => state.document.contenidoPDF) 
- console.log(contenidoPDF)
+ const  contenidoPDF   = useSelector((state) => state.document.contenidoPDF) 
+
 
  
   return (
@@ -44,7 +42,7 @@ function DocumentsCheck() {
         <h1>{t('documents.nombre')}</h1>
         <h2>{t('common.test')}</h2>
         <h3>{t('documents.client',{ns:'client'})}</h3>
-        <div>`0 ${document.contenidoPDF} 0`</div>
+        <div> {contenidoPDF}</div>
     </div>
     <div id="container">
     <div className="dx-fieldset">
