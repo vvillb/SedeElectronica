@@ -7,6 +7,7 @@ import { getDocument } from '../../store/user/slices/documents/thunks';
 import { SimpleItem } from 'devextreme-react/form';
 import { Form } from 'devextreme-react/data-grid';
 import { Button, TextBox } from 'devextreme-react';
+import { setContenidoPDF } from '../../store/user/slices/documents/documentSlice';
 
 
 
@@ -43,6 +44,7 @@ function DocumentsCheck() {
         <h1>{t('documents.nombre')}</h1>
         <h2>{t('common.test')}</h2>
         <h3>{t('documents.client',{ns:'client'})}</h3>
+        <div>`0 ${document.contenidoPDF} 0`</div>
     </div>
     <div id="container">
     <div className="dx-fieldset">
