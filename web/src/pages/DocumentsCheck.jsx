@@ -32,8 +32,18 @@ function DocumentsCheck() {
 
 
  const  contenidoPDF   = useSelector((state) => state.document.contenidoPDF) 
-
-
+   var binary=atob(contenidoPDF);
+   console.log(binary);
+  
+   function handleDownload(contenidoPDF) {
+    const linkSource = `application/pdf;base64,${contenidoPDF}`;
+    const downloadLink = document.createElement("a");
+    const fileName = "documento.pdf";
+    downloadLink.href = `data:${linkSource}`;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+   
  
   return (
   <Layout>
@@ -53,10 +63,15 @@ function DocumentsCheck() {
             </div>
           </div>
           </div>
-    <Button type="default"  useSubmitBehavior={true} onClick={handleButtonClick}>buscar</Button>
- 
-
-
+          <div> <Button type="default"  useSubmitBehavior={true} onClick={handleButtonClick}>Buscar</Button></div>
+   <br/>
+    {contenidoPDF && (
+    <div>
+      <Button type="default" useSubmitBehavior={true}  onClick={() => handleDownload(contenidoPDF)}>
+        Descargar
+      </Button>
+    </div>
+     )}
     {/* <Form formData={searchTerm} readOnly={false}>
           <SimpleItem
             dataField="searchTerm"
