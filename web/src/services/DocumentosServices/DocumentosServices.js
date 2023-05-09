@@ -4,9 +4,15 @@
 
 import axiosService from "../axiosService";
 
+
+
 class DocumentosService {
+    
     checkDocumento (idDocumento) {
-        return axiosService.get( `/Documentos/CotejoDocumento/${idDocumento}`)
+        
+        console.log('url documento:' ,`/Documentos/CotejoDocumento/${idDocumento}`)
+        return axiosService.axiosInstance.get( `/Documentos/CotejoDocumento/${idDocumento}`)
+        
     }
 }
 

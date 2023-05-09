@@ -5,10 +5,10 @@ import axios from 'axios'
 class AxiosService {
   
   constructor() {
-    console.log('BASE_URL:', `@client-BASE_URL`);
+    console.log('prueba', process.env.API_URL);
 
     this.axiosInstance = axios.create({
-      baseURL: process.env.BASE_URL,
+      baseURL: process.env.API_URL,
       headers: {
         'Content-Type': 'application/json'
       }

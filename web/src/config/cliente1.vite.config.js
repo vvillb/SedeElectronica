@@ -25,6 +25,7 @@ export default defineConfig({
       }
     },
     define: {
-      BASE_URL: 'https://localhost:7041',
-    },
+      'process.env': {
+        API_URL: 'https://localhost:7041',
+    },}
 })

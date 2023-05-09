@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '@client-layout';
 import {useTranslation} from 'react-i18next'
 import { useState } from 'react';
-import DocumentosService from '../../services/DocumentosServices/documentosServices';
+import DocumentosService from '../../services/DocumentosServices/DocumentosServices';
 
 function Verificacion() {
   const{t}=useTranslation('common');
