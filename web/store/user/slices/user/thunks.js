@@ -1,4 +1,4 @@
-import { userApi } from '../../apis/userApi';
+import axiosService from '../../../../src/services/axiosService';
 import { setLoginUser } from './userSlice';
 
 
@@ -9,7 +9,7 @@ export const getLoginUser = (certificadoFirma, mensaje) => {
         console.log("test thunk",certificadoFirma,mensaje)
       
  
-        try{ const { data } = await userApi.post('/Login', {
+        try{ const { data } = await axiosService.axiosInstance.post('/Login', {
             certificadoFirma,
             mensaje
           });  
