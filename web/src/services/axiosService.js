@@ -4,7 +4,7 @@ import axios from 'axios'
 
 class AxiosService {
   axiosInstance;
-  
+
   constructor() {
     console.log('prueba', process.env.API_URL);
 
@@ -27,4 +27,10 @@ class AxiosService {
 
 const axiosService = new AxiosService()
 
+
+export const setToken = axiosService.setToken.bind(axiosService);
+export const removeToken = axiosService.removeToken.bind(axiosService);
+
+
 export default axiosService
+//C14CAA93-D308-42AB-ABB2-FEE62205B419s
