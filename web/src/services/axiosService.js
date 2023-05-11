@@ -1,8 +1,9 @@
-
+import React from 'react';
 import axios from 'axios'
 
 
 class AxiosService {
+  axiosInstance;
   
   constructor() {
     console.log('prueba', process.env.API_URL);
