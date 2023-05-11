@@ -31,7 +31,6 @@ function LoginPage() {
   }
 
   const futufirmaAutenticacionRecibida=(datos)=> {
-    console.log('futufirmaAutenticacionRecibida: ');
    
     dispatch( getLoginUser(datos.certificadoFirma, datos.firma) )
     

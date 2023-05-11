@@ -21,7 +21,6 @@ export const userSlice = createSlice({
             state.isLoading = false;
             state.user = action.payload;
             state.autenticado=true;
-            console.log('action.payload:',action.payload);
             setToken(action.payload.tokenJWT)
            
         },
