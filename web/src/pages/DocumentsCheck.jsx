@@ -44,7 +44,7 @@ function DocumentsCheck() {
         setMessage('El documento buscado no pudo ser encontrado.');
       }
     } catch (error) {
-      console.log(error);
+     
       // Error handling
       setMessage('Error');
     }
