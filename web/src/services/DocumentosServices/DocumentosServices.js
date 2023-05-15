@@ -10,7 +10,6 @@ class DocumentosService {
     
     checkDocumento (idDocumento) {
         
-        console.log('url documento:' ,`/Documentos/CotejoDocumento/${idDocumento}`)
         return axiosService.axiosInstance.get( `/Documentos/CotejoDocumento/${idDocumento}`)
         
     }

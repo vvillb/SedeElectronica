@@ -12,8 +12,7 @@ export const DocumentSlice = createSlice({
         state.isLoading = true;
       },
       setDocument: (state, action) => {
-        console.log('payload: ', action.payload)
-        state.isLoading = false;
+         state.isLoading = false;
         // state.data = action.payload;
         state.contenidoPDF=action.payload.contenidoPDF;
       },
