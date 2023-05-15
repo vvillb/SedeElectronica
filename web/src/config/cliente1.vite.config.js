@@ -22,7 +22,7 @@ export default defineConfig({
           '@client-TypeScriptLayout':path.resolve(__dirname,'../plugins/client1/TypeScriptLayout.tsx'),
           
 
-      }
+      },
     },
     define: {
       'process.env': {

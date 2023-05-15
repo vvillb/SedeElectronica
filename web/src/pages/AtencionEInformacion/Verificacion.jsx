@@ -15,7 +15,10 @@ function Verificacion() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const {data} = await service.checkDocumento(consulta)
+      const {data,error} = await service.checkDocumento(consulta)
+      //if error mostrar mensaje de error 
+
+      //else:
       if (data.contenidoPDF){
         setRespuesta(data.contenidoPDF)
         // TODO: en este punto se podría quitar la variable reactiva "respuesta" y llamar al método de descarga

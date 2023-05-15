@@ -9,6 +9,7 @@ import { Form } from 'devextreme-react/data-grid';
 import { Button, TextBox } from 'devextreme-react';
 import { setContenidoPDF } from '../../store/user/slices/documents/documentSlice';
 import DocumentosService from '../services/DocumentosServices/DocumentosServices';
+import { AxiosError } from 'axios';
 
 //C14CAA93-D308-42AB-ABB2-FEE62205B419
 
@@ -30,23 +31,47 @@ function DocumentsCheck() {
    const handleButtonClick = async () => {
     try {
       const { data } = await service.checkDocumento(inputValue);
+     
 
       if (data.contenidoPDF) {
-        // Call handleDownload function to download the PDF
+          // const url = window.URL.createObjectURL(data.contenidoPDF);
+          // const a = document.createElement('a');
+          // a.style.display = 'none';
+          // a.href = url;
+          // // the filename you want
+          // a.download = 'documento.pdf';
+          // document.body.appendChild(a);
+          // a.click();
+          // window.URL.revokeObjectURL(url);
+          // alert('your file has downloaded!'); //
+        
+       // Call handleDownload function to download the PDF
         const linkSource = `application/pdf;base64,${data.contenidoPDF}`;
         const downloadLink = document.createElement('a');
         const fileName = 'documento.pdf';
         downloadLink.href = `data:${linkSource}`;
+        document.body.appendChild(downloadLink);
         downloadLink.download = fileName;
         downloadLink.click();
+        downloadLink.parentNode.removeChild(downloadLink);
+       
+        
       } else {
         // Document not found
         setMessage('El documento buscado no pudo ser encontrado.');
       }
     } catch (error) {
      
-      // Error handling
-      setMessage('Error');
+      if (error.response && error.response.status === 401) {
+        // Unauthorized (401) error
+        setMessage('Debes autenticarte para buscar documentos.');
+      } else if (error.response && error.response.status === 500) {
+        // Internal Server Error (500) - Document not found
+        setMessage('Documento no encontrado.');
+      } else {
+        // Other errors
+        setMessage('Error');
+      }
     }
   };
   const [message, setMessage] = useState('');
