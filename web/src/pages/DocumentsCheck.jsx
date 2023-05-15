@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '@client-layout';
 import {useTranslation} from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,14 +8,17 @@ import { SimpleItem } from 'devextreme-react/form';
 import { Form } from 'devextreme-react/data-grid';
 import { Button, TextBox } from 'devextreme-react';
 import { setContenidoPDF } from '../../store/user/slices/documents/documentSlice';
+import DocumentosService from '../services/DocumentosServices/DocumentosServices';
 
-
+//C14CAA93-D308-42AB-ABB2-FEE62205B419
 
 function DocumentsCheck() {
   const [inputValue, setInputValue] = useState('');
   const{t}=useTranslation('common');
   const dispatch = useDispatch();
-  // const [searchTerm, setSearchTerm] = useState('');
+  const service = new DocumentosService(); // Instantiate the service
+
+
 
   //limpiar la navegación si es una página de raíz:
    dispatch(clearBreadcrumbs());
@@ -23,17 +26,34 @@ function DocumentsCheck() {
   const label='Nueva página';
   dispatch(addBreadcrumbs({label}))
 
-  // Handle search button click
-  const handleButtonClick = () => {
-     dispatch(getDocument(inputValue));
+   // Handle search button click
+   const handleButtonClick = async () => {
+    try {
+      const { data } = await service.checkDocumento(inputValue);
 
-   };
-
-
+      if (data.contenidoPDF) {
+        // Call handleDownload function to download the PDF
+        const linkSource = `application/pdf;base64,${data.contenidoPDF}`;
+        const downloadLink = document.createElement('a');
+        const fileName = 'documento.pdf';
+        downloadLink.href = `data:${linkSource}`;
+        downloadLink.download = fileName;
+        downloadLink.click();
+      } else {
+        // Document not found
+        setMessage('El documento buscado no pudo ser encontrado.');
+      }
+    } catch (error) {
+      console.log(error);
+      // Error handling
+      setMessage('Error');
+    }
+  };
+  const [message, setMessage] = useState('');
 
  const  contenidoPDF   = useSelector((state) => state.document.contenidoPDF) 
-   var binary=atob(contenidoPDF);
-   console.log(binary);
+
+//a continuacion de la respuesta del servidor  (si no hay eror)
   
    function handleDownload(contenidoPDF) {
     const linkSource = `application/pdf;base64,${contenidoPDF}`;
@@ -43,7 +63,15 @@ function DocumentsCheck() {
     downloadLink.download = fileName;
     downloadLink.click();
   }
-   
+  useEffect(() => {
+    // Check if contenidoPDF is available
+    if (contenidoPDF) {
+      // Call handleDownload function to download the PDF
+      handleDownload();
+    }
+  }, [contenidoPDF]);
+
+
  
   return (
   <Layout>
@@ -52,7 +80,6 @@ function DocumentsCheck() {
         <h1>{t('documents.nombre')}</h1>
         <h2>{t('common.test')}</h2>
         <h3>{t('documents.client',{ns:'client'})}</h3>
-        <div> {contenidoPDF}</div>
     </div>
     <div id="container">
     <div className="dx-fieldset">
@@ -64,31 +91,9 @@ function DocumentsCheck() {
           </div>
           </div>
           <div> <Button type="default"  useSubmitBehavior={true} onClick={handleButtonClick}>Buscar</Button></div>
-   <br/>
-    {contenidoPDF && (
-    <div>
-      <Button type="default" useSubmitBehavior={true}  onClick={() => handleDownload(contenidoPDF)}>
-        Descargar
-      </Button>
-    </div>
-     )}
-    {/* <Form formData={searchTerm} readOnly={false}>
-          <SimpleItem
-            dataField="searchTerm"
-            editorType="dxTextBox"
-            editorOptions={{
-              onValueChanged: (e) => setSearchTerm(e.value),
-            }}
-            label={{
-              text: 'Buscar',
-            }}
-          />
-          <Button
-            text="Buscar documento"
-            onClick={handleSearch}
-          />
-        </Form> */}
-            </div>
+           </div>
+           {message && <div className="error-message">{message}</div>}
+            
   </Layout>
   )
 }
