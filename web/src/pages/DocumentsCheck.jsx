@@ -93,7 +93,7 @@ function DocumentsCheck() {
         <h3>{t('documents.client',{ns:'client'})}</h3>
     </div>
     <div id="container">
-      <h6>tjhrtjsrjrj </h6>
+      
     <div className="dx-fieldset">
           <div className="dx-field">
             <div className="dx-field-label">Buscar documentos</div>
