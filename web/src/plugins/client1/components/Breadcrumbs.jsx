@@ -2,9 +2,61 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, unstable_HistoryRouter } from 'react-router-dom';
 import { clearBreadcrumbs } from '../../../../store/user/slices/breadcrumbs/breadcrumbSlice';
+import futufirma from '../../../utils/futufirma';
+import { getLoginUser } from '../../../../store/user/slices/user/thunks';
+import { setLogoutUser } from '../../../../store/user/slices/user/userSlice';
+import { Button  as DevButton } from 'devextreme-react';
+
+
 
 function Breadcrumbs() {
-  const dispatch = useDispatch();
+ 
+const {  autenticado,user } = useSelector((state) => state.user)
+const dispatch = useDispatch();
+
+
+//FUTUFIRMA///////////////////////////////////
+function futufirmaVersionRecibida(mensaje) {
+  console.log('futufirmaVersionRecibida: ', mensaje)
+
+}
+
+const futufirmaAutenticacionRecibida=(datos)=> {
+ 
+  dispatch( getLoginUser(datos.certificadoFirma, datos.firma) )
+  
+ 
+}
+
+function noInstalado() {
+  console.log('No instalado -> Open')
+  window.open('/Futufirma/FutuFirma.java-1.0.40.msi');
+}
+
+const autenticar = () => { 
+  futufirma.onRespuesta = futufirmaAutenticacionRecibida;
+  futufirma.autenticar();
+}
+const logout = () => {
+  dispatch(setLogoutUser());
+  console.log("usuario auteticado:", autenticado)
+};
+
+// eslint-disable-next-line no-unused-vars
+const version = () => {
+  futufirma.onRespuesta = futufirmaVersionRecibida;
+  futufirma.version()
+}
+
+futufirma.onAplicacionNoInstalada = noInstalado;
+
+futufirma.debug = true;
+futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC Componentes Informáticos","AC FNMT Usuarios","AC DNIE 004","AC DNIE 005","AC DNIE 006"];
+/*  version() */
+////////////////////////////////////////////////////
+
+
+
   // const history = unstable_HistoryRouter();
 
   useEffect(() => {
@@ -23,11 +75,10 @@ function Breadcrumbs() {
 
   return (
     <div className="flex items-center bg-gray-800 py-2 px-4">
-      {/* Botón navegación de React Router */}
+     <div>
       <Link to="/" className="text-gray-300 hover:text-gray-500">Ir a la página anterior</Link>
 
-      {/* Botón personalizado
-      <button onClick={() => history.goBack()}>Atrás</button>*/}
+      
       
       <nav className="w-full pl-32">
         <ol>
@@ -41,7 +92,24 @@ function Breadcrumbs() {
           ))}
         </ol>
       </nav>
-    </div>
+      </div>
+      <div>
+        <span>
+          {autenticado?`Hola, ${user.nombre}!`:"Para acceder con futufirma debes autenticarte"}
+        </span>
+       
+          {autenticado?(
+            <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={logout}>
+            Logout
+            </DevButton> 
+          ):(
+            <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={ autenticar}>
+            Autenticarse
+            </DevButton> 
+          )}
+          </div>
+            </div>
+    
   )
 }
 

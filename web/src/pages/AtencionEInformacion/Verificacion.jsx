@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, TextBox } from 'devextreme-react';
 import { addBreadcrumbs, clearBreadcrumbs } from '../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import DocumentosService from '../../services/DocumentosServices/DocumentosServices';
+import { HttpStatusCode } from 'axios';
+import { startLoadingUsers } from '../../../store/user/slices/user/userSlice';
 
 
 //C14CAA93-D308-42AB-ABB2-FEE62205B419
@@ -28,7 +30,7 @@ function DocumentsCheck() {
     try {
       const { data } = await service.checkDocumento(inputValue);
      
-
+      
       if (data.contenidoPDF) {
   
        // Call handleDownload function to download the PDF
@@ -46,16 +48,10 @@ function DocumentsCheck() {
       }
     } catch (error) {
      
-      if (error.response && error.response.status === 401) {
-        // Unauthorized (401) error
-        setMessage('Debes autenticarte para buscar documentos.');
-      } else if (error.response && error.response.status === 500) {
-        // Internal Server Error (500) - Document not found
-        setMessage('Documento no encontrado.');
-      } else {
-        // Other errors
-        setMessage('Error');
-      }
+      
+        setMessage('Error. Documento no encontrado');
+       
+      
     }
   };
   const [message, setMessage] = useState('');
@@ -91,6 +87,7 @@ function DocumentsCheck() {
         <h3>{t('documents.client',{ns:'client'})}</h3>
     </div>
     <div id="container">
+      
     <div className="dx-fieldset">
           <div className="dx-field">
             <div className="dx-field-label">Buscar documentos</div>

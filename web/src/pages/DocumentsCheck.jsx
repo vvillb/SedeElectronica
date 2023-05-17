@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import { Button, TextBox } from 'devextreme-react';
 import DocumentosService from '../services/DocumentosServices/DocumentosServices';
+import { HttpStatusCode } from 'axios';
 
 
 //C14CAA93-D308-42AB-ABB2-FEE62205B419
@@ -25,6 +26,7 @@ function DocumentsCheck() {
 
    // Handle search button click
    const handleButtonClick = async () => {
+    
     try {
       const { data } = await service.checkDocumento(inputValue);
      
@@ -91,6 +93,7 @@ function DocumentsCheck() {
         <h3>{t('documents.client',{ns:'client'})}</h3>
     </div>
     <div id="container">
+      <h6>tjhrtjsrjrj </h6>
     <div className="dx-fieldset">
           <div className="dx-field">
             <div className="dx-field-label">Buscar documentos</div>
