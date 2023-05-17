@@ -52,10 +52,7 @@ const products = [{
     
     ],
    },
-    {
-      id: '3',
-      path:'/documentos',
-      name: 'Documentos'},];
+  ];
 
 
 

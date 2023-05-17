@@ -3,13 +3,9 @@ import Layout from '@client-layout';
 import {useTranslation} from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux';
 import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
-import { getDocument } from '../../store/user/slices/documents/thunks';
-import { SimpleItem } from 'devextreme-react/form';
-import { Form } from 'devextreme-react/data-grid';
 import { Button, TextBox } from 'devextreme-react';
-import { setContenidoPDF } from '../../store/user/slices/documents/documentSlice';
 import DocumentosService from '../services/DocumentosServices/DocumentosServices';
-import { AxiosError } from 'axios';
+
 
 //C14CAA93-D308-42AB-ABB2-FEE62205B419
 
@@ -34,17 +30,7 @@ function DocumentsCheck() {
      
 
       if (data.contenidoPDF) {
-          // const url = window.URL.createObjectURL(data.contenidoPDF);
-          // const a = document.createElement('a');
-          // a.style.display = 'none';
-          // a.href = url;
-          // // the filename you want
-          // a.download = 'documento.pdf';
-          // document.body.appendChild(a);
-          // a.click();
-          // window.URL.revokeObjectURL(url);
-          // alert('your file has downloaded!'); //
-        
+  
        // Call handleDownload function to download the PDF
         const linkSource = `application/pdf;base64,${data.contenidoPDF}`;
         const downloadLink = document.createElement('a');
@@ -54,8 +40,6 @@ function DocumentsCheck() {
         downloadLink.download = fileName;
         downloadLink.click();
         downloadLink.parentNode.removeChild(downloadLink);
-       
-        
       } else {
         // Document not found
         setMessage('El documento buscado no pudo ser encontrado.');

@@ -1,49 +1,110 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '@client-layout';
 import {useTranslation} from 'react-i18next'
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, TextBox } from 'devextreme-react';
+import { addBreadcrumbs, clearBreadcrumbs } from '../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import DocumentosService from '../../services/DocumentosServices/DocumentosServices';
 
-function Verificacion() {
+
+//C14CAA93-D308-42AB-ABB2-FEE62205B419
+
+function DocumentsCheck() {
+  const [inputValue, setInputValue] = useState('');
   const{t}=useTranslation('common');
+  const dispatch = useDispatch();
+  const service = new DocumentosService(); // Instantiate the service
 
-  const [consulta, setConsulta] = useState('')
-  const [respuesta, setRespuesta] = useState('')
 
-  const service = new DocumentosService()
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  //limpiar la navegación si es una página de raíz:
+   dispatch(clearBreadcrumbs());
+  //introducir un elemento
+  const label='Nueva página';
+  dispatch(addBreadcrumbs({label}))
+
+   // Handle search button click
+   const handleButtonClick = async () => {
     try {
-      const {data,error} = await service.checkDocumento(consulta)
-      //if error mostrar mensaje de error 
+      const { data } = await service.checkDocumento(inputValue);
+     
 
-      //else:
-      if (data.contenidoPDF){
-        setRespuesta(data.contenidoPDF)
-        // TODO: en este punto se podría quitar la variable reactiva "respuesta" y llamar al método de descarga
+      if (data.contenidoPDF) {
+  
+       // Call handleDownload function to download the PDF
+        const linkSource = `application/pdf;base64,${data.contenidoPDF}`;
+        const downloadLink = document.createElement('a');
+        const fileName = 'documento.pdf';
+        downloadLink.href = `data:${linkSource}`;
+        document.body.appendChild(downloadLink);
+        downloadLink.download = fileName;
+        downloadLink.click();
+        downloadLink.parentNode.removeChild(downloadLink);
+      } else {
+        // Document not found
+        setMessage('El documento buscado no pudo ser encontrado.');
       }
     } catch (error) {
-      console.log(error)
+     
+      if (error.response && error.response.status === 401) {
+        // Unauthorized (401) error
+        setMessage('Debes autenticarte para buscar documentos.');
+      } else if (error.response && error.response.status === 500) {
+        // Internal Server Error (500) - Document not found
+        setMessage('Documento no encontrado.');
+      } else {
+        // Other errors
+        setMessage('Error');
+      }
     }
   };
+  const [message, setMessage] = useState('');
 
+ const  contenidoPDF   = useSelector((state) => state.document.contenidoPDF) 
+
+//a continuacion de la respuesta del servidor  (si no hay eror)
+  
+   function handleDownload(contenidoPDF) {
+    const linkSource = `application/pdf;base64,${contenidoPDF}`;
+    const downloadLink = document.createElement("a");
+    const fileName = "documento.pdf";
+    downloadLink.href = `data:${linkSource}`;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+  useEffect(() => {
+    // Check if contenidoPDF is available
+    if (contenidoPDF) {
+      // Call handleDownload function to download the PDF
+      handleDownload();
+    }
+  }, [contenidoPDF]);
+
+
+ 
   return (
-    <Layout>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="consulta">Documento:</label>
-        <input type="text" id="consulta" value={consulta} onChange={event => setConsulta(event.target.value)} />
-        <button type="submit">Consultar documento</button>
-      </div>
-      <div>
-        <label htmlFor="texto">Respuesta:</label>   
-        {respuesta}
-      </div>
-      
-    </form>
-    </Layout>
-  );
+  <Layout>
+    <div>
+        <h1>Consulta de documentos</h1>
+        <h1>{t('documents.nombre')}</h1>
+        <h2>{t('common.test')}</h2>
+        <h3>{t('documents.client',{ns:'client'})}</h3>
+    </div>
+    <div id="container">
+    <div className="dx-fieldset">
+          <div className="dx-field">
+            <div className="dx-field-label">Buscar documentos</div>
+            <div className="dx-field-value">
+              <TextBox value={inputValue} onValueChanged={(e) => setInputValue(e.value) } defaultValue="" />
+            </div>
+          </div>
+          </div>
+          <div> <Button type="default"  useSubmitBehavior={true} onClick={handleButtonClick}>Buscar</Button></div>
+           </div>
+           {message && <div className="error-message">{message}</div>}
+            
+  </Layout>
+  )
 }
 
-export default Verificacion;
+export default DocumentsCheck;

@@ -86,10 +86,10 @@ function LoginPage() {
         
         
           </div>
-        <div className="relative py-3 sm:w-96 mx-auto text-center">
+        {/* <div className="relative py-3 sm:w-96 mx-auto text-center">
           
           <RegisterForm/>
-          {/* <span className="text-2xl font-light ">Login to your account</span>
+          <span className="text-2xl font-light ">Login to your account</span>
           <div className="mt-4 text-left dx-card">
             <div className="h-2 dx-theme-accent-as-background-color rounded-t-md"></div>
             <div className="px-8 py-6 dx-theme-border-color-as-background-color">
@@ -103,10 +103,9 @@ function LoginPage() {
                  {/*<DevButton text="Login" className='mt-4 px-6' type='default' />
                   <a href="#" className="text-sm hover:underline">Contraseña olvidada?</a>
                 </div>
-            </div>*/}
-      
+            </div>
         
-      </div>
+      </div> */}
 </>
     </Layout>    
   )
