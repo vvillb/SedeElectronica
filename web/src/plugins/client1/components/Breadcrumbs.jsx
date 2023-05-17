@@ -74,8 +74,9 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
   const breadcrumbs = useSelector((state) => state.breadcrumbs);
 
   return (
+   <>
     <div className="flex items-center bg-gray-800 py-2 px-4">
-     <div>
+   
       <Link to="/" className="text-gray-300 hover:text-gray-500">Ir a la página anterior</Link>
 
       
@@ -92,24 +93,29 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
           ))}
         </ol>
       </nav>
+      <div className=' flex  items-center'>
+      <div >
+       <span className="text-gray-300">
+         {autenticado?`Hola, ${user.nombre}!`:"Para acceder con futufirma debes autenticarte"}
+       </span>
       </div>
-      <div>
-        <span>
-          {autenticado?`Hola, ${user.nombre}!`:"Para acceder con futufirma debes autenticarte"}
-        </span>
+      <div className=' flex items-center'>
+         {autenticado?(
+          <>
+          
+           <DevButton className=' px-6 flex flex-end ' type='default' icon='clear'  onClick={logout}>
+            
+           </DevButton> </>
+         ):(
+           <DevButton className=' px-6 flex flex-end' type='default' icon='user'  onClick={ autenticar}>
+          login 
+           </DevButton> 
+         )}
+         </div></div>
+      </div>
        
-          {autenticado?(
-            <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={logout}>
-            Logout
-            </DevButton> 
-          ):(
-            <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={ autenticar}>
-            Autenticarse
-            </DevButton> 
-          )}
-          </div>
-            </div>
-    
+         </>    
+
   )
 }
 
