@@ -3,7 +3,7 @@ import React from 'react'
 const Comunicaciones = () => {
   return (
     <div>
-      <h1> Comunicaciones!!! </h1>
+      <h1> Listado de comunicaciones </h1>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import React from 'react'
 const Notificaciones = () => {
   return (
     <div>
-      <h1>Notificaciones</h1>
+      <h1>Listado de Notificaciones</h1>
     </div>
   )
 }

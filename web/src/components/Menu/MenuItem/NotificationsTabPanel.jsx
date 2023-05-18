@@ -12,9 +12,7 @@ class NotificationsTabPanel extends React.Component    {
 
     return (
       <div>
-        <h1> prueba</h1>
-        <Notificaciones/>
-        <Comunicaciones/> 
+        
         <TabPanel
         dataSource={Object.keys(tabComponents)}
         itemComponent={({ data }) => {
