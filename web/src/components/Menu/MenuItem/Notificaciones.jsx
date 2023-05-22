@@ -5,12 +5,7 @@ import List from 'devextreme-react/list';
 const searchModes = ['contains', 'startsWith', 'equals'];
 
 const Notificationes = ({ notifications }) => {
-  const [searchMode, setSearchMode] = useState('contains');
-
-  const onSearchModeChange = (e) => {
-    setSearchMode(e.value);
-  };
-
+   
   const ItemTemplate = (data) => {
     return (
       <div>
@@ -31,20 +26,10 @@ const Notificationes = ({ notifications }) => {
           itemRender={ItemTemplate}
           searchExpr={['codigoExpediente', 'descripcionExpediente', 'fechaEnvio', 'estado']}
           searchEnabled={true}
-          searchMode={searchMode}
+          searchMode='contains'
         />
       </div>
-      <div className="options">
-        <div className="caption">Options</div>
-        <div className="option">
-          <span>Search mode </span>
-          <SelectBox
-            items={searchModes}
-            value={searchMode}
-            onValueChanged={onSearchModeChange}
-          />
-        </div>
-      </div>
+      
     </React.Fragment>
   );
 };
