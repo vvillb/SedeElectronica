@@ -8,11 +8,13 @@ const Notificationes = ({ notifications }) => {
    
   const ItemTemplate = (data) => {
     return (
-      <div>
-        <p><b>Código de Expediente:</b> {data.codigoExpediente}</p>
-        <p><b>Descripción del Expediente:</b> {data.descripcionExpediente}</p>
-        <p><b>Fecha de Envío:</b> {data.fechaEnvio}</p>
-        <p><b>Estado:</b> {data.estado}</p>
+      <div className='dx-fieldset'>
+        <div className="field-label"> 
+          <b>Código de Expediente:</b> {data.codigoExpediente}<br/>
+          <b>Descripción del Expediente:</b> {data.descripcionExpediente}<br/>
+          <b>Fecha de Envío:</b> {data.fechaEnvio}<br/>
+          <b>Estado:</b> {data.estado}
+        </div>
       </div>
     );
   };
