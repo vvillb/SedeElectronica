@@ -2,11 +2,12 @@ import React from 'react'
 import Notificaciones from './Notificaciones'
 import Comunicaciones from './Comunicaciones'
 import { TabPanel } from 'devextreme-react';
+import NotificacionesPrueba from './NotificacionesPrueba';
 
 class NotificationsTabPanel extends React.Component    {
   render() {
     const tabComponents={
-        Notificaciones:Notificaciones,
+        Notificaciones:NotificacionesPrueba,
         Comunicaciones:Comunicaciones,
     };
 
