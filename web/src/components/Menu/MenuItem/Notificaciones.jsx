@@ -2,63 +2,31 @@ import React, { useState } from 'react';
 import SelectBox from 'devextreme-react/select-box';
 import List from 'devextreme-react/list';
 
+const searchModes = ['contains', 'startsWith', 'equals'];
+
 const Notificationes = ({ notifications }) => {
   const [searchMode, setSearchMode] = useState('contains');
-  const [searchText, setSearchText] = useState('');
 
-  const handleSearchModeChange = (e) => {
+  const onSearchModeChange = (e) => {
     setSearchMode(e.value);
   };
 
-  const handleSearchTextChange = (e) => {
-    setSearchText(e.value);
+  const ItemTemplate = (data) => {
+    return (
+      <div>
+        <p><b>Código de Expediente:</b> {data.codigoExpediente}</p>
+        <p><b>Descripción del Expediente:</b> {data.descripcionExpediente}</p>
+        <p><b>Fecha de Envío:</b> {data.fechaEnvio}</p>
+        <p><b>Estado:</b> {data.estado}</p>
+      </div>
+    );
   };
-  
-
-  const filteredNotifications = notifications.filter((notification) => {
-    const { codigoExpediente, descripcionExpediente, fechaEnvio, estado } = notification;
-
-    switch (searchMode) {
-      case 'contains':
-        return (
-          codigoExpediente.includes(searchText) ||
-          descripcionExpediente.includes(searchText) ||
-          fechaEnvio.includes(searchText) ||
-          estado.includes(searchText)
-        );
-      case 'startsWith':
-        return (
-          codigoExpediente.startsWith(searchText) ||
-          descripcionExpediente.startsWith(searchText) ||
-          fechaEnvio.startsWith(searchText) ||
-          estado.startsWith(searchText)
-        );
-      case 'equals':
-        return (
-          codigoExpediente === searchText ||
-          descripcionExpediente === searchText ||
-          fechaEnvio === searchText ||
-          estado === searchText
-        );
-      default:
-        return true;
-    }
-  });
-
-  const ItemTemplate = ({ data }) => (
-    <div>
-      <div><b>Código Expediente:</b> {data?.codigoExpediente}</div>
-      <div><b>Descripción Expediente:</b> {data?.descripcionExpediente}</div>
-      <div><b>Fecha de Envío:</b> {data?.fechaEnvio}</div>
-      <div><b>Estado:</b> {data?.estado}</div>
-    </div>
-  );
 
   return (
     <React.Fragment>
       <div className="list-container">
         <List
-          dataSource={filteredNotifications}
+          dataSource={notifications}
           height={400}
           itemRender={ItemTemplate}
           searchExpr={['codigoExpediente', 'descripcionExpediente', 'fechaEnvio', 'estado']}
@@ -69,16 +37,12 @@ const Notificationes = ({ notifications }) => {
       <div className="options">
         <div className="caption">Options</div>
         <div className="option">
-          <span>Search mode:</span>
+          <span>Search mode </span>
           <SelectBox
-            items={['contains', 'startsWith', 'equals']}
+            items={searchModes}
             value={searchMode}
-            onValueChanged={handleSearchModeChange}
+            onValueChanged={onSearchModeChange}
           />
-        </div>
-        <div className="option">
-          <span>Search text:</span>
-          <input type="text" value={searchText} onChange={handleSearchTextChange} />
         </div>
       </div>
     </React.Fragment>
