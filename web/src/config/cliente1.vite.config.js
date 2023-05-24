@@ -20,7 +20,9 @@ export default defineConfig({
           '@client-i18n_es':path.resolve(__dirname,'../../src/plugins/client1/i18n/es/client.json'),
           '@client-menuData':path.resolve(__dirname,'../../src/plugins/client1/components/data/Data.jsx'),
           '@client-TypeScriptLayout':path.resolve(__dirname,'../plugins/client1/TypeScriptLayout.tsx'),
-          
+          '@client-AtencionMenuData':path.resolve(__dirname,'../../src/plugins/client1/components/data/AtencionSubMenuData.jsx'),
+          '@client-CarpetaMenuData':path.resolve(__dirname,'../../src/plugins/client1/components/data/CarpetaCiudadanaSubmenuData.jsx'),
+
 
       },
     },

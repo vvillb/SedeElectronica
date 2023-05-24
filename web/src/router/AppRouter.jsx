@@ -8,17 +8,17 @@ import MisExpedientes from '../pages/CarpetaCiudadana/MisExpedientes'
 import MisNotificaciones from '../pages/CarpetaCiudadana/MisNotificaciones'
 import MisSolicitudes from '../pages/CarpetaCiudadana/MisSolicitudes'
 import DocumentsCheck from '../pages/DocumentsCheck'
-import IndexPage from '../pages/IndexPage'
 import LoginPage from '../pages/LoginPage'
 import ServicesPage from '../pages/ServicesPage'
 import Verificacion from '../pages/AtencionEInformacion/Verificacion'
+import AtencionPage from '../pages/AtencionPage'
 
 
 function AppRouter() {
   return (
         <Routes>
             <Route path='/documentos' element={<DocumentsCheck/>}/> 
-            <Route path='/atencion' element={<IndexPage/>}/> 
+            <Route path='/atencion' element={<AtencionPage/>}/> 
             <Route path='*' element={<LoginPage/>}/> 
             <Route path='/CarpetaCiudadana' element={<ServicesPage/>}/> 
             <Route path='/AtencionEInformacion/Catalogo' element={<Catalogo/>}/>
