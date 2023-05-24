@@ -2,13 +2,12 @@ import React from 'react'
 import Layout from '@client-layout';
 import futufirma from '../utils/futufirma'
 import { useDispatch , useSelector} from 'react-redux';
-import { getLoginUser } from '../../store/user/slices/user/thunks';
-import { setLogoutUser } from '../../store/user/slices/user/userSlice';
+import { getLoginUser, setLogoutUser } from '../../store/user/slices/user/userSlice';
 
 
 
 import { Button  as DevButton } from 'devextreme-react';
-import RegisterForm from '../plugins/common/registerForm';
+// import RegisterForm from '../plugins/common/registerForm';
 import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
 
 function LoginPage() {
@@ -42,9 +41,12 @@ function LoginPage() {
     window.open('/Futufirma/FutuFirma.java-1.0.40.msi');
   }
 
-  const autenticar = () => { 
+  const autenticar = (datos) => { 
     futufirma.onRespuesta = futufirmaAutenticacionRecibida;
     futufirma.autenticar();
+    dispatch(getLoginUser(datos.certificadoFirma, datos.firma))
+    console.log('autenticar',datos.mensaje)
+
   }
   const logout = () => {
     dispatch(setLogoutUser());

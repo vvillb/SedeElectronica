@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, unstable_HistoryRouter } from 'react-router-dom';
 import { clearBreadcrumbs } from '../../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import futufirma from '../../../utils/futufirma';
-import { getLoginUser } from '../../../../store/user/slices/user/thunks';
 import { setLogoutUser } from '../../../../store/user/slices/user/userSlice';
 import { Button  as DevButton } from 'devextreme-react';
 
@@ -11,7 +10,7 @@ import { Button  as DevButton } from 'devextreme-react';
 
 function Breadcrumbs() {
  
- const {  autenticado,user } = useSelector((state) => state.user)
+//  const {  autenticado,user } = useSelector((state) => state.user)
 const dispatch = useDispatch();
 
 
@@ -93,7 +92,7 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
           ))}
         </ol>
       </nav>
-        <div className=' flex  items-center'>
+        {/* <div className=' flex  items-center'>
       <div >
        <span className="text-gray-300">
            {autenticado?`Hola, ${user?.nombre}!`:"Para acceder con futufirma debes autenticarte"}  
@@ -111,7 +110,7 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
           login 
            </DevButton> 
          )}
-         </div></div> 
+         </div></div>  */}
       </div>
        
          </>    

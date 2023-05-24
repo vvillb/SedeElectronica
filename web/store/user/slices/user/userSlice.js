@@ -1,39 +1,78 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axiosService from '../../../../src/services/axiosService';
 import { setToken, removeToken } from '../../../../src/services/axiosService';
 
-
-
-
-export const userSlice = createSlice({
-    name: 'user',
-    initialState: {
-       
-        user: "",
-        isLoading: false,
-        autenticado:false,
-    },
-    reducers: {
-        startLoadingUsers: (state, /* action */ ) => {
-            state.isLoading = true;
-        },
-        setLoginUser: ( state, action ) => {
-            state.isLoading = false;
-            state.user = action.payload;
-            state.autenticado=true;
-            setToken(action.payload.tokenJWT)
-           
-        },
-        setLogoutUser: (state) => {
-            state.user = "";
-            state.isLoading = false;
-            state.autenticado = false;
-            removeToken();
-        },
+export const getLoginUser = createAsyncThunk(
+  'user/login',
+  async ({ certificadoFirma, mensaje }, thunkAPI) => {
+    try {
+      console.log('user/login',mensaje,certificadoFirma)
+      const response = await axiosService.axiosInstance.post('/Login', {
+        certificadoFirma,
+        mensaje
+      });
+      console.log('RESPUESTA getLoginUser:', mensaje)
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
+  }
+);
+
+
+
+const userSlice = createSlice({
+  name: 'user',
+  initialState:{
+    entities: [],
+    user: "",
+  isLoading: false,
+  autenticado: false,
+  loginStatus: 'idle',
+  },
+  reducers: {
+    startLoadingUsers: (state) => {
+      console.log('startloadinguser')
+      state.isLoading = true;
+    },
+    setLoginUser: (state, action) => {
+      console.log('setloginuser')
+      state.isLoading = false;
+      state.user = action.payload;
+      state.autenticado = true;
+      setToken(action.payload.tokenJWT);
+    },
+    setLogoutUser: (state) => {
+      state.user = "";
+      state.isLoading = false;
+      state.autenticado = false;
+      removeToken();
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getLoginUser.pending, (state) => {
+        state.isLoading = true;
+        state.loginStatus = 'loading';
+        console.log('is pending')
+      })
+      .addCase(getLoginUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user.push = action.payload;
+        state.autenticado = true;
+        setToken(action.payload.tokenJWT);
+        state.loginStatus = 'succeeded';
+        console.log('fulfilled')
+        
+      })
+      .addCase(getLoginUser.rejected, (state) => {
+        state.isLoading = false;
+        state.loginStatus = 'failed';
+      });
+  },
 });
 
+export const { startLoadingUsers, setLoginUser, setLogoutUser } = userSlice.actions;
 
-// Action creators are generated for each case reducer function
-export const { startLoadingUsers, setLoginUser , setLogoutUser} = userSlice.actions;
-export default userSlice.reducer;
+export default userSlice;

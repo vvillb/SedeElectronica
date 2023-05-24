@@ -1,28 +1,28 @@
-// import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-// export const DocumentSlice = createSlice({
-//     name: 'document',
-//     initialState: {
-//       // data: "",
-//       isLoading: false,
-//       contenidoPDF: "",
-//     },
-//     reducers: {
-//       startLoadingDocuments: (state) => {
-//         state.isLoading = true;
-//       },
-//       setDocument: (state, action) => {
-//         console.log('payload: ', action.payload)
-//         state.isLoading = false;
-//         // state.data = action.payload;
-//         state.contenidoPDF=action.payload.contenidoPDF;
-//       },
-//       setContenidoPDF: (state, action) => {
-//         state.contenidoPDF = action.payload;
-//       },
-//     },
-//   });
+export const notificationslice = createSlice({
+    name: 'document',
+    initialState: {
+      // data: "",
+      isLoading: false,
+      contenidoNotificacion: "",
+    },
+    reducers: {
+      startLoadingNotifications: (state) => {
+        state.isLoading = true;
+      },
+      setDocument: (state, action) => {
+        console.log('payload: ', action.payload)
+        state.isLoading = false;
+        // state.data = action.payload;
+        state.contenidoNotificacion=action.payload.contenidoNotificacion;
+      },
+      setContenidoNotificacion: (state, action) => {
+        state.contenidoNotificacion = action.payload;
+      },
+    },
+  });
   
-//   export const { startLoadingDocuments, setDocument,setContenidoPDF } = DocumentSlice.actions;
+  export const { startLoadingNotifications, setDocument,setContenidoNotificacion } = notificationslice.actions;
   
   
