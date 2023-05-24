@@ -11,7 +11,7 @@ import { Button  as DevButton } from 'devextreme-react';
 
 function Breadcrumbs() {
  
-const {  autenticado,user } = useSelector((state) => state.user)
+ const {  autenticado,user } = useSelector((state) => state.user)
 const dispatch = useDispatch();
 
 
@@ -80,7 +80,7 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
       <Link to="/" className="text-gray-300 hover:text-gray-500">Ir a la página anterior</Link>
 
       
-      
+      <h1>ggk</h1>
       <nav className="w-full pl-32">
         <ol>
           {breadcrumbs.map((item, index) => (
@@ -93,11 +93,11 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
           ))}
         </ol>
       </nav>
-      <div className=' flex  items-center'>
+        <div className=' flex  items-center'>
       <div >
        <span className="text-gray-300">
-         {autenticado?`Hola, ${user.nombre}!`:"Para acceder con futufirma debes autenticarte"}
-       </span>
+           {autenticado?`Hola, ${user?.nombre}!`:"Para acceder con futufirma debes autenticarte"}  
+                 </span>
       </div>
       <div className=' flex items-center'>
          {autenticado?(
@@ -111,7 +111,7 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
           login 
            </DevButton> 
          )}
-         </div></div>
+         </div></div> 
       </div>
        
          </>    
