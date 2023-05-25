@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import { addBreadcrumbs } from '../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import NotificationsTabPanel from '../../components/Menu/MenuItem/NotificationsTabPanel';
 import NotificacionesService from '../../services/NotificacionesServices/NotificacionesService';
-import { Button as DevButton } from 'devextreme-react';
+import { DataGrid, Button as DevButton } from 'devextreme-react';
+import { Column } from 'devextreme-react/data-grid';
 
 
 
@@ -57,11 +58,14 @@ return (
        <div>
         <h1>Lista de Libros</h1>
         {notificaciones ? (
-          <div>
+          <DataGrid
+              dataSource={notificaciones?.datos?.filas[0].fila}
+              showBorders={true}
+              columnAutoWidth={true}
+              >
             {notificaciones?.datos?.campos.map((campo, nombre) => (
-              <div key={campo.nombre}>
-                <b>{campo.nombre}:</b>
-              </div>
+               <Column  key={campo.nombre} dataField={campo.nombre} caption={campo.nombre} />
+              
             ))}
             {notificaciones?.datos?.filas.map((fila, index) => (
               <div key={index}>
@@ -74,7 +78,7 @@ return (
                 })}
               </div>
             ))}
-          </div>
+          </DataGrid>
         ) : (
           <div>no content</div>
         )}
