@@ -16,7 +16,7 @@ function MisNotificaciones() {
 const [inputValue, setInputValue] = useState('');
   const service = new NotificacionesService(); // Instantiate the service
 
-  const [notificaciones, setNotificaciones] = useState([]);
+  const [notificaciones, setNotificaciones] = useState([{datos:{campos:'campos'}}]);
 
 const idContribuyente=19561;
 
@@ -31,7 +31,7 @@ const idContribuyente=19561;
         console.error('Error al obtener las notificaciones', error);
       }
      
-      
+     
     };
 
     fetchNotificaciones();
@@ -56,14 +56,14 @@ return (
     <>
        <div>
         <h1>Lista de Libros</h1>
-        {notificaciones.datos.campos ? (
+        {notificaciones ? (
           <div>
-            {notificaciones.datos.campos.map((campo, nombre) => (
+            {notificaciones?.datos?.campos.map((campo, nombre) => (
               <div key={campo.nombre}>
                 <b>{campo.nombre}:</b>
               </div>
             ))}
-            {notificaciones.datos.filas.map((fila, index) => (
+            {notificaciones?.datos?.filas.map((fila, index) => (
               <div key={index}>
                  {fila.fila.map((valor, idx) => {
                   const campo = notificaciones.datos.campos[idx];
