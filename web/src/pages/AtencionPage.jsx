@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '@client-layout';
 import { useDispatch } from 'react-redux';
 import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
@@ -22,12 +22,19 @@ function AtencionPage(props) {
     }
   const dispatch = useDispatch();
 
-  //limpiar la navegación si es una página de raíz:
+
+/////////////////////////////////
+useEffect(() => {
+  // Clean up the navigation if it's a root page
   dispatch(clearBreadcrumbs());
-  //introducir un elemento
-  const label='Nueva página';
-  
-  dispatch(addBreadcrumbs({label}))
+  // Add a new breadcrumb element
+  const label = 'Nueva página';
+  dispatch(addBreadcrumbs({ label }));
+}, [dispatch]);
+////////////////////////////////////
+
+
+
   return (
   <Layout>
     <div>

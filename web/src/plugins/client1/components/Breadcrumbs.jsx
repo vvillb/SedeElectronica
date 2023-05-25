@@ -56,7 +56,6 @@ futufirma.debug = true;
 futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC Componentes Informáticos","AC FNMT Usuarios","AC DNIE 004","AC DNIE 005","AC DNIE 006"];
 /*  version() */
 ////////////////////////////////////////////////////
-const condicion=false;
 
 
   useEffect(() => {
@@ -81,7 +80,7 @@ const condicion=false;
       <Link to="/" className="text-gray-300 hover:text-gray-500">Ir a la página anterior</Link>
 
       
-      <h1>ggk</h1>
+     
       <nav className="w-full pl-32">
         <ol>
           {breadcrumbs.map((item, index) => (

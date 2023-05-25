@@ -18,12 +18,13 @@ function DocumentsCheck() {
   const service = new DocumentosService(); // Instantiate the service
 
 
-
-  //limpiar la navegación si es una página de raíz:
-   dispatch(clearBreadcrumbs());
-  //introducir un elemento
-  const label='Nueva página';
-  dispatch(addBreadcrumbs({label}))
+/////////////////////////////////
+useEffect(() => {
+  // Add a new breadcrumb element
+  const label = 'Nueva página';
+  dispatch(addBreadcrumbs({ label }));
+}, [dispatch]);
+////////////////////////////////////
 
    // Handle search button click
    const handleButtonClick = async () => {

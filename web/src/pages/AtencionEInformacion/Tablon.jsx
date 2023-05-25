@@ -7,12 +7,15 @@ function Tablon() {
   const dispatch = useDispatch();
 
  
-  //introducir un elemento
-  const label='Nueva página';
-  
 
-  useEffect
-  dispatch(addBreadcrumbs({label}))
+  
+/////////////////////////////////
+useEffect(() => {
+  // Add a new breadcrumb element
+  const label = 'Nueva página';
+  dispatch(addBreadcrumbs({ label }));
+}, [dispatch]);
+////////////////////////////////////
 
     return (
       <Layout>

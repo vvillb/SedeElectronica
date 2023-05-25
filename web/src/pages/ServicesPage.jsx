@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from '@client-layout';
 import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import { useDispatch } from 'react-redux';
@@ -22,11 +22,15 @@ function ServicesPage(props) {
 
   const dispatch = useDispatch();
 
-    //limpiar la navegación si es una página de raíz:
-    dispatch(clearBreadcrumbs());
-    //introducir un elemento
-    const label='Nueva página';
-    dispatch(addBreadcrumbs({label}))
+/////////////////////////////////
+useEffect(() => {
+  // Clean up the navigation if it's a root page
+  dispatch(clearBreadcrumbs());
+  // Add a new breadcrumb element
+  const label = 'Nueva página';
+  dispatch(addBreadcrumbs({ label }));
+}, [dispatch]);
+////////////////////////////////////
 
   return (
     <Layout>

@@ -10,13 +10,13 @@ function MisDocumentos() {
   const dispatch = useDispatch();
 
 
-    //introducir un elemento
-    const label='Nueva página';
-
-    useEffect(() => {
-    dispatch(addBreadcrumbs({label}))
-    console.log('añadir miga')
-  }, [dispatch]);
+/////////////////////////////////
+useEffect(() => {
+  // Add a new breadcrumb element
+  const label = 'Nueva página';
+  dispatch(addBreadcrumbs({ label }));
+}, [dispatch]);
+////////////////////////////////////
 
     return (
       <Layout>

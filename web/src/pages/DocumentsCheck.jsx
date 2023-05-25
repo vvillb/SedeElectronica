@@ -17,11 +17,15 @@ function DocumentsCheck() {
 
 
 
-  //limpiar la navegación si es una página de raíz:
-   dispatch(clearBreadcrumbs());
-  //introducir un elemento
-  const label='Nueva página';
-  dispatch(addBreadcrumbs({label}))
+/////////////////////////////////
+useEffect(() => {
+  // Clean up the navigation if it's a root page
+  dispatch(clearBreadcrumbs());
+  // Add a new breadcrumb element
+  const label = 'Nueva página';
+  dispatch(addBreadcrumbs({ label }));
+}, [dispatch]);
+////////////////////////////////////
 
    // Handle search button click
    const handleButtonClick = async () => {
