@@ -6,7 +6,6 @@ export const getLoginUser = createAsyncThunk(
   'user/login',
   async ( {certificadoFirma, firma}, thunkAPI) => {
     try {
-       console.log('FROM USER SLICE:','firma:', firma ,'certificado:' ,certificadoFirma)
       const {data} = await axiosService.axiosInstance.post('/Login', {
         CertificadoFirma: certificadoFirma,
         Mensaje:firma,

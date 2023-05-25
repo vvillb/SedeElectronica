@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, unstable_HistoryRouter } from 'react-router-dom';
 import { clearBreadcrumbs } from '../../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import futufirma from '../../../utils/futufirma';
-import { setLogoutUser } from '../../../../store/user/slices/user/userSlice';
+import { getLoginUser, setLogoutUser } from '../../../../store/user/slices/user/userSlice';
 import { Button  as DevButton } from 'devextreme-react';
 
 
 
 function Breadcrumbs() {
  
-//  const {  autenticado,user } = useSelector((state) => state.user)
+const {  autenticado, user } = useSelector((state) => state.user)
 const dispatch = useDispatch();
 
 
@@ -21,10 +21,9 @@ function futufirmaVersionRecibida(mensaje) {
 }
 
 const futufirmaAutenticacionRecibida=(datos)=> {
- 
-  dispatch( getLoginUser(datos.certificadoFirma, datos.firma) )
   
- 
+  dispatch( getLoginUser({ certificadoFirma: datos.certificadoFirma, firma: datos.firma }) )
+  
 }
 
 function noInstalado() {
@@ -32,13 +31,17 @@ function noInstalado() {
   window.open('/Futufirma/FutuFirma.java-1.0.40.msi');
 }
 
-const autenticar = () => { 
+const autenticar = (datos) => { 
   futufirma.onRespuesta = futufirmaAutenticacionRecibida;
   futufirma.autenticar();
+  
+  dispatch(getLoginUser(datos.certificadoFirma, datos.firma))
+
+
 }
 const logout = () => {
   dispatch(setLogoutUser());
-  console.log("usuario auteticado:", autenticado)
+  
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -53,15 +56,14 @@ futufirma.debug = true;
 futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC Componentes Informáticos","AC FNMT Usuarios","AC DNIE 004","AC DNIE 005","AC DNIE 006"];
 /*  version() */
 ////////////////////////////////////////////////////
+const condicion=false;
 
-
-
-  // const history = unstable_HistoryRouter();
 
   useEffect(() => {
     const handlePopState = () => {
-      dispatch(clearBreadcrumbs());
-      console.log('prueba')
+      if (breadcrumbs.length > 0) {
+        dispatch(clearBreadcrumbs());
+      }
     };
     window.addEventListener('popstate', handlePopState);
 
@@ -92,25 +94,29 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
           ))}
         </ol>
       </nav>
-        {/* <div className=' flex  items-center'>
+        <div className=' flex  items-center'>
       <div >
        <span className="text-gray-300">
            {autenticado?`Hola, ${user?.nombre}!`:"Para acceder con futufirma debes autenticarte"}  
                  </span>
       </div>
-      <div className=' flex items-center'>
-         {autenticado?(
-          <>
-          
-           <DevButton className=' px-6 flex flex-end ' type='default' icon='clear'  onClick={logout}>
-            
-           </DevButton> </>
-         ):(
-           <DevButton className=' px-6 flex flex-end' type='default' icon='user'  onClick={ autenticar}>
-          login 
-           </DevButton> 
-         )}
-         </div></div>  */}
+      <div className='flex items-center'>
+     {autenticado ? (
+       <div>
+        
+         <DevButton className='px-6 flex flex-end' type='default'  onClick={logout} >
+          logout
+         </DevButton>
+       </div>
+     ) : (
+       <div>
+         <DevButton className='px-6 flex flex-end' type='default' icon='user' onClick={autenticar}>
+           login
+         </DevButton>
+       </div>
+     )}
+   </div>
+         </div> 
       </div>
        
          </>    

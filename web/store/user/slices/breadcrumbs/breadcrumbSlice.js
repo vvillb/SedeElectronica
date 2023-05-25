@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const breadcrumbSlice = createSlice({
-  name: 'breadcrumb',
+  name: 'breadcrumbs',
   initialState: [],
   reducers:{
     addBreadcrumbs(state,action){

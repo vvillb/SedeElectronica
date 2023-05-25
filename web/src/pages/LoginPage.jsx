@@ -32,10 +32,7 @@ function LoginPage() {
   const futufirmaAutenticacionRecibida=(datos)=> {
   
     dispatch( getLoginUser({ certificadoFirma: datos.certificadoFirma, firma: datos.firma }) )
-    // console.log('FROM LOGIN PAGA_DATOS:',datos)
-    // console.log('FROM LOGIN PAGE:DESTRUCTURADO:','FIRMA:',datos.firma,'CERTIFICADO:',datos.certificadoFirma)
-    //aquí SI tengo firma y certificado...
-   
+    
 }
 
   function noInstalado() {
