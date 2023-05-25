@@ -38,50 +38,55 @@ const idContribuyente=19561;
   }, []);
 
   
-
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('es-ES');
+  };
 
 
 useEffect(() => {
   // Add a new breadcrumb element
   const label = 'Nueva página';
   dispatch(addBreadcrumbs({ label }));
-  console.log('NOTIFICACIONES ARRAY:' ,notificaciones)
-  console.log('notificaciones.datos.campos',notificaciones.datos.campos)
+ 
 }, [dispatch,notificaciones]);
  
-    return (
-      <Layout>
-
-        <> 
-        <div>
-      <h1>Lista de Libros</h1>
-
-    
-            {notificaciones.datos.campos.map((campo,nombre) => (
-          <div key={campo.nombre}>
-            <b>{campo.nombre}:</b> 
-          </div>
-        ))}
-
-        {notificaciones.datos.filas.map((fila, index) => (
-          <div key={index}>
-           
-            {fila.fila.map((valor, idx) => (
-              <div key={idx}>{valor}</div>
+return (
+  <Layout>
+    <>
+       <div>
+        <h1>Lista de Libros</h1>
+        {notificaciones.datos.campos ? (
+          <div>
+            {notificaciones.datos.campos.map((campo, nombre) => (
+              <div key={campo.nombre}>
+                <b>{campo.nombre}:</b>
+              </div>
+            ))}
+            {notificaciones.datos.filas.map((fila, index) => (
+              <div key={index}>
+                 {fila.fila.map((valor, idx) => {
+                  const campo = notificaciones.datos.campos[idx];
+                  if (campo.tipo === "DateTimeOffset" || campo.tipo === "DateTime") {
+                    return <div key={idx}>{formatDate(valor)}</div>;
+                  }
+                  return <div key={idx}>{valor}</div>;
+                })}
+              </div>
             ))}
           </div>
-        ))}
-      {/* <button onClick={() => handleDetalleClick()}>Ver Detalle</button> */}
-    </div>
+        ) : (
+          <div>no content</div>
+        )}
+        {/* <button onClick={() => handleDetalleClick()}>Ver Detalle</button> */}
+      </div> 
+      <div>
+        <h1>Mis notificaciones</h1>
+        <NotificationsTabPanel />
+      </div>
+    </>
+  </Layout>
+)
+        }
 
-        <div>
-           <h1>Mis notificaciones</h1>
-           <NotificationsTabPanel/>
-          </div>
-        </>
-       
-      </Layout>
-    )
-  }
-  
-  export default MisNotificaciones
+export default MisNotificaciones;
