@@ -2,6 +2,8 @@ import React from 'react'
 import Notificationes from './Notificaciones';
 
 const NotificacionesPrueba = () => {
+
+  
     const notifications = [
         {
           codigoExpediente: 'EXP001',

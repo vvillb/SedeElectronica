@@ -21,3 +21,4 @@ export const breadcrumbSlice = createSlice({
 export const { addBreadcrumbs, popBreadcrumb, clearBreadcrumbs  } = breadcrumbSlice.actions;
 
 export default breadcrumbSlice.reducer;
+

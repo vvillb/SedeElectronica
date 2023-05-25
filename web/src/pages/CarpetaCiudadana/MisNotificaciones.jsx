@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '@client-layout';
 import { useDispatch } from 'react-redux';
 import { addBreadcrumbs } from '../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import NotificationsTabPanel from '../../components/Menu/MenuItem/NotificationsTabPanel';
+import NotificacionesService from '../../services/NotificacionesServices/NotificacionesService';
+import { Button as DevButton } from 'devextreme-react';
 
 
 
@@ -10,21 +12,74 @@ function MisNotificaciones() {
 
   const dispatch = useDispatch();
 
- 
-/////////////////////////////////
+  ///for fetching notificaciones/////
+const [inputValue, setInputValue] = useState('');
+  const service = new NotificacionesService(); // Instantiate the service
+
+  const [notificaciones, setNotificaciones] = useState([]);
+
+const idContribuyente=19561;
+
+  useEffect(() => {
+    const fetchNotificaciones = async () => {
+      try {
+        const notificacionesService = new NotificacionesService();
+        const {data }= await notificacionesService.obtenerNotificaciones(idContribuyente);
+        setNotificaciones(data);
+        
+      } catch (error) {
+        console.error('Error al obtener las notificaciones', error);
+      }
+     
+      
+    };
+
+    fetchNotificaciones();
+  }, []);
+
+  
+
+
+
 useEffect(() => {
   // Add a new breadcrumb element
   const label = 'Nueva página';
   dispatch(addBreadcrumbs({ label }));
-}, [dispatch]);
-////////////////////////////////////
+  console.log('NOTIFICACIONES ARRAY:' ,notificaciones)
+  console.log('notificaciones.datos.campos',notificaciones.datos.campos)
+}, [dispatch,notificaciones]);
  
     return (
       <Layout>
-          <div>
+
+        <> 
+        <div>
+      <h1>Lista de Libros</h1>
+
+    
+            {notificaciones.datos.campos.map((campo,nombre) => (
+          <div key={campo.nombre}>
+            <b>{campo.nombre}:</b> 
+          </div>
+        ))}
+
+        {notificaciones.datos.filas.map((fila, index) => (
+          <div key={index}>
+           
+            {fila.fila.map((valor, idx) => (
+              <div key={idx}>{valor}</div>
+            ))}
+          </div>
+        ))}
+      {/* <button onClick={() => handleDetalleClick()}>Ver Detalle</button> */}
+    </div>
+
+        <div>
            <h1>Mis notificaciones</h1>
            <NotificationsTabPanel/>
           </div>
+        </>
+       
       </Layout>
     )
   }

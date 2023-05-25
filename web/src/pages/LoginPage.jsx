@@ -17,7 +17,7 @@ function LoginPage() {
 
   const dispatch = useDispatch();
 
-
+/////////////////////////////////
   useEffect(() => {
     // Clean up the navigation if it's a root page
     dispatch(clearBreadcrumbs());
@@ -25,6 +25,7 @@ function LoginPage() {
     const label = 'Nueva página';
     dispatch(addBreadcrumbs({ label }));
   }, [dispatch]);
+////////////////////////////////////
 
   function futufirmaVersionRecibida(mensaje) {
     console.log('futufirmaVersionRecibida: ', mensaje)
