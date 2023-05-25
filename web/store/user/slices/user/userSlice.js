@@ -4,15 +4,16 @@ import { setToken, removeToken } from '../../../../src/services/axiosService';
 
 export const getLoginUser = createAsyncThunk(
   'user/login',
-  async ({ certificadoFirma, mensaje }, thunkAPI) => {
+  async ( {certificadoFirma, firma}, thunkAPI) => {
     try {
-      console.log('user/login',mensaje,certificadoFirma)
-      const response = await axiosService.axiosInstance.post('/Login', {
-        certificadoFirma,
-        mensaje
+       console.log('FROM USER SLICE:','firma:', firma ,'certificado:' ,certificadoFirma)
+      const {data} = await axiosService.axiosInstance.post('/Login', {
+        CertificadoFirma: certificadoFirma,
+        Mensaje:firma,
+        
       });
-      console.log('RESPUESTA getLoginUser:', mensaje)
-      return response.data;
+      return data;
+
     } catch (error) {
       console.log(error);
       throw error;
@@ -59,7 +60,7 @@ const userSlice = createSlice({
       })
       .addCase(getLoginUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user.push = action.payload;
+        state.user = action.payload;
         state.autenticado = true;
         setToken(action.payload.tokenJWT);
         state.loginStatus = 'succeeded';
