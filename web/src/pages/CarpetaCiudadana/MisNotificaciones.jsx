@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addBreadcrumbs } from '../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import NotificationsTabPanel from '../../components/Menu/MenuItem/NotificationsTabPanel';
 import NotificacionesService from '../../services/NotificacionesServices/NotificacionesService';
-import { DataGrid, Button as DevButton } from 'devextreme-react';
+import { DataGrid, Button as DevButton, List, TabPanel } from 'devextreme-react';
 import { Column } from 'devextreme-react/data-grid';
 
 
@@ -72,48 +72,46 @@ const transformedData = notificaciones?.datos?.filas.map((fila) => {
 
   return rowData;
 });
+
+const ItemTemplate = (data) => {
+  return (
+    <div className='dx-fieldset'>
+      {Object.entries(data).map(([fieldName, fieldValue]) => (
+        <td key={fieldName}>
+          <th>{fieldName}:</th>    
+        <tr key={fieldName} className="field-label">      
+        {fieldValue}</tr>  
+       </td> 
+      ))}
+    </div>
+  );
+};
  
 return (
   <Layout>
     <>
+    <div>
+       <List
+          dataSource={transformedData}
+          searchExpr={['codigoExpediente', 'descripcionExpediente', 'fechaEnvio', 'estado']}
+          searchEnabled={true}
+          searchMode='contains'
+          itemRender={ItemTemplate}
+    
+    />
+    </div>
+   
+
     <DataGrid
       dataSource={transformedData}
       defaultColumns={fieldNames}
       showBorders={true}
     
     />
-       <div>
-        <h1>Lista de Libros</h1>
-        {notificaciones ? (
-          <DataGrid
-              dataSource={notificaciones?.datos?.filas[0].fila}
-              showBorders={true}
-              columnAutoWidth={true}
-              >
-            {notificaciones?.datos?.campos.map((campo, nombre) => (
-               <Column  key={campo.nombre} dataField={campo.nombre} caption={campo.nombre} />
-              
-            ))}
-            {notificaciones?.datos?.filas.map((fila, index) => (
-              <div key={index}>
-                 {fila.fila.map((valor, idx) => {
-                  const campo = notificaciones.datos.campos[idx];
-                  if (campo.tipo === "DateTimeOffset" || campo.tipo === "DateTime") {
-                    return <div key={idx}>{formatDate(valor)}</div>;
-                  }
-                  return <div key={idx}>{valor}</div>;
-                })}
-              </div>
-            ))}
-          </DataGrid>
-        ) : (
-          <div>no content</div>
-        )}
-        {/* <button onClick={() => handleDetalleClick()}>Ver Detalle</button> */}
-      </div> 
+       
       <div>
         <h1>Mis notificaciones</h1>
-        <NotificationsTabPanel />
+       
       </div>
     </>
   </Layout>

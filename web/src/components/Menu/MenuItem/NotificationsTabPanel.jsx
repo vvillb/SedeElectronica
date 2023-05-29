@@ -5,10 +5,10 @@ import { TabPanel } from 'devextreme-react';
 import NotificacionesPrueba from './NotificacionesPrueba';
 
 class NotificationsTabPanel extends React.Component    {
-  render() {
+  render(NotificacionesTab,ComunicacionesTab) {
     const tabComponents={
-        Notificaciones:NotificacionesPrueba,
-        Comunicaciones:Comunicaciones,
+        Notificaciones:NotificacionesTab,
+        Comunicaciones:ComunicacionesTab,
     };
 
     return (
