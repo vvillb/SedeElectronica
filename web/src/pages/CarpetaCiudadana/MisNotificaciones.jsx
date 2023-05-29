@@ -76,16 +76,20 @@ const transformedData = notificaciones?.datos?.filas.map((fila) => {
 const ItemTemplate = (data) => {
   return (
     <div className='dx-fieldset'>
-      {Object.entries(data).map(([fieldName, fieldValue]) => (
-        <td key={fieldName}>
-          <th>{fieldName}:</th>    
-        <tr key={fieldName} className="field-label">      
-        {fieldValue}</tr>  
-       </td> 
-      ))}
+      <table>
+        <tbody>
+          {Object.entries(data).map(([fieldName, fieldValue]) => (
+            <tr key={fieldName} className="field-label">
+              <th>{fieldName}:</th>
+              <td>{fieldValue}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
+
  
 return (
   <Layout>
@@ -93,7 +97,7 @@ return (
     <div>
        <List
           dataSource={transformedData}
-          searchExpr={['codigoExpediente', 'descripcionExpediente', 'fechaEnvio', 'estado']}
+          searchExpr={transformedData}
           searchEnabled={true}
           searchMode='contains'
           itemRender={ItemTemplate}
@@ -102,17 +106,14 @@ return (
     </div>
    
 
-    <DataGrid
+    {/* <DataGrid
       dataSource={transformedData}
       defaultColumns={fieldNames}
       showBorders={true}
     
-    />
+    /> */}
        
-      <div>
-        <h1>Mis notificaciones</h1>
-       
-      </div>
+   
     </>
   </Layout>
 )
