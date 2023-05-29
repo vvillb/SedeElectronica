@@ -51,10 +51,37 @@ useEffect(() => {
   dispatch(addBreadcrumbs({ label }));
  
 }, [dispatch,notificaciones]);
+
+// Get the field names dynamically from the backend data
+const fieldNames = notificaciones?.datos?.campos?.map((campo) => campo.nombre);
+
+// Transform the data into the array of objects
+const transformedData = notificaciones?.datos?.filas.map((fila) => {
+  const rowData = {};
+
+  fila.fila.forEach((valor, index) => {
+    const fieldName = fieldNames[index];
+    const campo = notificaciones?.datos?.campos[index];
+
+    if (campo.tipo === "DateTimeOffset" || campo.tipo === "DateTime") {
+      rowData[fieldName] = formatDate(valor);
+    } else {
+      rowData[fieldName] = valor;
+    }
+  });
+
+  return rowData;
+});
  
 return (
   <Layout>
     <>
+    <DataGrid
+      dataSource={transformedData}
+      defaultColumns={fieldNames}
+      showBorders={true}
+    
+    />
        <div>
         <h1>Lista de Libros</h1>
         {notificaciones ? (
