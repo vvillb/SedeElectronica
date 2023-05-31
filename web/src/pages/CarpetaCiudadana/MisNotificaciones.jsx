@@ -17,15 +17,15 @@ function MisNotificaciones() {
 const [inputValue, setInputValue] = useState('');
   const service = new NotificacionesService(); // Instantiate the service
 
-  const [notificaciones, setNotificaciones] = useState([{datos:{campos:'campos'}}]);
+const [notificaciones, setNotificaciones] = useState([{datos:{campos:'campos'}}]);
 
-const idContribuyente=19561;
+
 
   useEffect(() => {
     const fetchNotificaciones = async () => {
       try {
         const notificacionesService = new NotificacionesService();
-        const {data }= await notificacionesService.obtenerNotificaciones(idContribuyente);
+        const {data }= await notificacionesService.obtenerNotificaciones();
         setNotificaciones(data);
         
       } catch (error) {

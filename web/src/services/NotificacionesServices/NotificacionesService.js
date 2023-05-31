@@ -4,9 +4,9 @@ import axiosService from "../axiosService";
 
 class NotificacionesService {
     
-    obtenerNotificaciones (idContribuyente) {
+    obtenerNotificaciones () {
         
-        return axiosService.axiosInstance.get( `/Notificaciones/GetNotificaciones/${idContribuyente}`)
+        return axiosService.axiosInstance.get( `/Notificaciones/GetNotificaciones/`)
         
     }
 }
