@@ -6,6 +6,7 @@ import NotificationsTabPanel from '../../components/Menu/MenuItem/NotificationsT
 import NotificacionesService from '../../services/NotificacionesServices/NotificacionesService';
 import { DataGrid, Button as DevButton, List, TabPanel } from 'devextreme-react';
 import { Column } from 'devextreme-react/data-grid';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -18,7 +19,7 @@ const [inputValue, setInputValue] = useState('');
   const service = new NotificacionesService(); // Instantiate the service
 
 const [notificaciones, setNotificaciones] = useState([{datos:{campos:'campos'}}]);
-const [idNotificacion,setIdNotficacion]=useState('')
+const [notificationId,setnotificationId]=useState('')
 
 
   useEffect(() => {
@@ -73,6 +74,15 @@ const transformedData = notificaciones?.datos?.filas.map((fila) => {
   return rowData;
 });
 
+console.log('notificaciones.datos.campo.idNotificacion',notificaciones?.datos?.campo?.id)
+//navegar al detalle de la notificacion:
+const navigate=useNavigate();
+
+const handleVerDetalle = (notificationId) => {
+  navigate(`/notification/${notificationId}`);
+};
+
+
 const ItemTemplate = (data) => {
   return (
     <div className='flex'>
@@ -86,7 +96,7 @@ const ItemTemplate = (data) => {
           ))}
         </tbody>
       </table>
-      <DevButton className='dx-fieldset'>
+      <DevButton className='dx-fieldset' onClick={handleVerDetalle}>
         ver detalle
       </DevButton>
     </div>

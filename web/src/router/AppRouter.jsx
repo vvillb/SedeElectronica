@@ -11,6 +11,7 @@ import LoginPage from '../pages/LoginPage'
 import ServicesPage from '../pages/ServicesPage'
 import Verificacion from '../pages/AtencionEInformacion/Verificacion'
 import AtencionPage from '../pages/AtencionPage'
+import DetalleNotificacion from '../pages/DetalleNotificacion'
 
 
 function AppRouter() {
@@ -27,6 +28,7 @@ function AppRouter() {
             <Route path='/CarpetaCiudadana/MisExpedientes' element={<MisExpedientes/>}/>
             <Route path='/CarpetaCiudadana/MisNotificaciones' element={<MisNotificaciones/>}/>
             <Route path='/CarpetaCiudadana/MisSolicitudes' element={<MisSolicitudes/>}/>
+            <Route path="/notification/:id" component={DetalleNotificacion}/>
         </Routes>
   )
 }
