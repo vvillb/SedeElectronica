@@ -18,7 +18,7 @@ const [inputValue, setInputValue] = useState('');
   const service = new NotificacionesService(); // Instantiate the service
 
 const [notificaciones, setNotificaciones] = useState([{datos:{campos:'campos'}}]);
-
+const [idNotificacion,setIdNotficacion]=useState('')
 
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const transformedData = notificaciones?.datos?.filas.map((fila) => {
 
 const ItemTemplate = (data) => {
   return (
-    <div className='dx-fieldset'>
+    <div className='flex'>
       <table>
         <tbody>
           {Object.entries(data).map(([fieldName, fieldValue]) => (
@@ -86,6 +86,9 @@ const ItemTemplate = (data) => {
           ))}
         </tbody>
       </table>
+      <DevButton className='dx-fieldset'>
+        ver detalle
+      </DevButton>
     </div>
   );
 };
