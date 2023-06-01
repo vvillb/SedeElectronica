@@ -4,7 +4,11 @@ import axios from 'axios'
 
 class AxiosService {
   axiosInstance;
+<<<<<<< Updated upstream
 
+=======
+  
+>>>>>>> Stashed changes
   constructor() {
     console.log('prueba', process.env.API_URL);
 
