@@ -58,10 +58,10 @@ useEffect(() => {
     <Layout>
       detalle notificacion 
       <h3>Notificación º</h3>
-      <h3>Bitácora: {bitacora}</h3>
-      <h3>Acciones:{acciones}</h3>
+      <h3>Bitácora: </h3>
+      <h3>Acciones:</h3>
       <h3>Descargar Adjunto</h3>
-      <h3>Acuse de lectura:{acuse}</h3>
+      <h3>Acuse de lectura:</h3>
     </Layout>
   )
 }
