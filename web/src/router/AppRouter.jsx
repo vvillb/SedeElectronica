@@ -28,7 +28,7 @@ function AppRouter() {
             <Route path='/CarpetaCiudadana/MisExpedientes' element={<MisExpedientes/>}/>
             <Route path='/CarpetaCiudadana/MisNotificaciones' element={<MisNotificaciones/>}/>
             <Route path='/CarpetaCiudadana/MisSolicitudes' element={<MisSolicitudes/>}/>
-            <Route path="/MisNotificaciones/:id" component={<DetalleNotificacion/>}/>
+            <Route path="/MisNotificaciones/:id" element={<DetalleNotificacion/>}/>
         </Routes>
   )
 }

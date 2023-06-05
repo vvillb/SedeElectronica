@@ -81,8 +81,7 @@ const navigate=useNavigate();
 
 const handleVerDetalle = () => {
   const selectedNotificationId = transformedData[0]?.Id;
-  console.log('transformedData[0].Id', selectedNotificationId);
-  navigate(`/notification/${selectedNotificationId}`);
+  navigate(`/MisNotificaciones/${selectedNotificationId}`);
 };
 
 
