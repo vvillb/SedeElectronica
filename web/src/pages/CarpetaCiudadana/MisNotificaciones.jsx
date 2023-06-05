@@ -19,7 +19,7 @@ const [inputValue, setInputValue] = useState('');
   const service = new NotificacionesService(); // Instantiate the service
 
 const [notificaciones, setNotificaciones] = useState([{datos:{campos:'campos'}}]);
-const [notificationId,setnotificationId]=useState('')
+const [notificationId,setNotificationId]=useState('')
 
 
   useEffect(() => {
@@ -28,6 +28,7 @@ const [notificationId,setnotificationId]=useState('')
         const notificacionesService = new NotificacionesService();
         const {data }= await notificacionesService.obtenerNotificaciones();
         setNotificaciones(data);
+        
         
       } catch (error) {
         console.error('Error al obtener las notificaciones', error);
@@ -70,16 +71,18 @@ const transformedData = notificaciones?.datos?.filas.map((fila) => {
       rowData[fieldName] = valor;
     }
   });
-
+  
   return rowData;
+  
 });
 
-console.log('notificaciones.datos.campo.idNotificacion',notificaciones?.datos?.campo?.id)
-//navegar al detalle de la notificacion:
+
 const navigate=useNavigate();
 
-const handleVerDetalle = (notificationId) => {
-  navigate(`/notification/${notificationId}`);
+const handleVerDetalle = () => {
+  const selectedNotificationId = transformedData[0]?.Id;
+  console.log('transformedData[0].Id', selectedNotificationId);
+  navigate(`/notification/${selectedNotificationId}`);
 };
 
 
