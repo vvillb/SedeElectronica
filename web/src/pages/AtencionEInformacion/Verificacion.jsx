@@ -84,8 +84,8 @@ useEffect(() => {
     <div>
         <h1>Consulta de documentos</h1>
         <h1>{t('documents.nombre')}</h1>
-        <h2>{t('common.test')}</h2>
-        <h3>{t('documents.client',{ns:'client'})}</h3>
+        {/* <h2>{t('common.test')}</h2>
+        <h3>{t('documents.client',{ns:'client'})}</h3> */}
     </div>
     <div id="container">
       

@@ -9,7 +9,6 @@ const DetalleNotificacion = () => {
     const dispatch = useDispatch();
 
     let idNotificacion=useParams();
-    console.log(idNotificacion.id)
 
 
 
@@ -25,6 +24,7 @@ const [bitacora,setBitacora]=useState('')
 const[acciones,setAcciones]=useState('');
 // const[descargarAdj,setDescargarAdj]=useState('');
 const[acuse,setAcuse]=useState('');
+const[infoNotificacion,setInfoNotificacion]=useState('');
 
 
 useEffect(() => {
@@ -38,12 +38,20 @@ useEffect(() => {
           const accionesResponse = await notificacionesService.getAccionesAMostrar(id);
         //   const descargarAdjResponse = await notificacionesService.descargarAdjunto(idNotificacion);
           const acuseResponse = await notificacionesService.getAcuseLectura(id);
+          const infoNotificacionResponse=await notificacionesService.getNotificacion(id);
   
           // Set the data obtained from the responses to the component state
           setBitacora(bitacoraResponse.data);
           setAcciones(accionesResponse.data);
         //   setDescargarAdj(descargarAdjResponse.data);
           setAcuse(acuseResponse.data);
+          setAcciones(accionesResponse.data);
+          setInfoNotificacion(infoNotificacionResponse.data)
+
+          console.log('acuse',acuse)
+          console.log('bitacora',bitacora)
+          console.log('acciones',acciones)
+          console.log('info',infoNotificacion)
         } catch (error) {
           console.error('Error fetching notification data', error);
         }
