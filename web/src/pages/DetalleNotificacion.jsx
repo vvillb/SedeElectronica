@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import NotificacionesService from '../services/NotificacionesServices/NotificacionesService';
+import { DataGrid } from 'devextreme-react';
 
 const DetalleNotificacion = () => {
     const dispatch = useDispatch();
@@ -41,15 +42,15 @@ useEffect(() => {
           const infoNotificacionResponse=await notificacionesService.getNotificacion(id);
   
           // Set the data obtained from the responses to the component state
-          setBitacora(bitacoraResponse.data);
+        
           setAcciones(accionesResponse.data);
         //   setDescargarAdj(descargarAdjResponse.data);
           setAcuse(acuseResponse.data);
           setAcciones(accionesResponse.data);
           setInfoNotificacion(infoNotificacionResponse.data)
-
           console.log('acuse',acuse)
-          console.log('bitacora',bitacora)
+          console.log('bitacora',bitacoraResponse.data)
+          setBitacora(bitacoraResponse.data)
           console.log('acciones',acciones)
           console.log('info',infoNotificacion)
         } catch (error) {
@@ -60,13 +61,21 @@ useEffect(() => {
       fetchNotificacionData();
     }, [idNotificacion]);
 
+      console.log('prueba bitacora',bitacora)
 
 
+
+
+    const columns=['id','accion','fecha','estado_Resultante']
   return (
     <Layout>
-      detalle notificacion 
-      <h3>Notificación º</h3>
+      <h1>Notificación º {idNotificacion.id}</h1>
       <h3>Bitácora: </h3>
+        <DataGrid
+        dataSource={bitacora}
+        columns={columns}
+        showBorders={true}
+      />
       <h3>Acciones:</h3>
       <h3>Descargar Adjunto</h3>
       <h3>Acuse de lectura:</h3>
