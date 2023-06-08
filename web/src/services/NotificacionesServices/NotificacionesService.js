@@ -21,9 +21,9 @@ class NotificacionesService {
         return axiosService.axiosInstance.get(`/Notificaciones/GetAccionesAMostrar/${idNotificacion}`);
       }
     
-    //   descargarAdjunto(idNotificacion) {
-    //     return axiosService.axiosInstance.get(`/Notificaciones/DescargarAdjunto/${idNotificacion}`);
-    //   }
+      descargarAdjunto(idNotificacion) {
+        return axiosService.axiosInstance.get(`/Notificaciones/DescargarAdjunto/${idNotificacion}`);
+      }
     
       getAcuseLectura(idNotificacion) {
         return axiosService.axiosInstance.get(`/Notificaciones/GetAcuseLectura/${idNotificacion}`);

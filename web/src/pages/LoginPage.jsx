@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import Layout from '@client-layout';
 import futufirma from '../utils/futufirma'
 import { useDispatch , useSelector} from 'react-redux';
@@ -16,6 +16,8 @@ function LoginPage() {
   const {  autenticado,user } = useSelector((state) => state.user)
 
   const dispatch = useDispatch();
+
+
 
 /////////////////////////////////
   useEffect(() => {
@@ -44,12 +46,13 @@ function LoginPage() {
   }
 
   const autenticar = (datos) => { 
-    futufirma.onRespuesta = futufirmaAutenticacionRecibida;
-    futufirma.autenticar();
-    
-    dispatch(getLoginUser(datos.certificadoFirma, datos.firma))
-  
 
+
+    futufirma.onRespuesta = futufirmaAutenticacionRecibida;
+    futufirma.autenticar();    
+    dispatch(getLoginUser(datos.certificadoFirma, datos.firma))
+    
+   
   }
   const logout = () => {
     dispatch(setLogoutUser());
@@ -67,7 +70,6 @@ function LoginPage() {
   futufirma.debug = true;
   futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC Componentes Informáticos","AC FNMT Usuarios","AC DNIE 004","AC DNIE 005","AC DNIE 006"];
  /*  version() */
-
 
   return (
     <Layout>

@@ -24,23 +24,24 @@ const DetalleNotificacion = () => {
 
 const [bitacora,setBitacora]=useState('')
 const[acciones,setAcciones]=useState('');
-// const[descargarAdj,setDescargarAdj]=useState('');
+const[descargarAdj,setDescargarAdj]=useState('');
 const[acuse,setAcuse]=useState('');
 const[infoNotificacion,setInfoNotificacion]=useState('');
 const[contenidoPDF,setContenidoPDF]=useState('');
 const[nombrePdfAcuse,setNombrePdfAcuse]=useState('');
+const[idAdj,setIdAdj]=useState('');
 
 
 useEffect(() => {
     const fetchNotificacionData = async () => {
-        console.log('useParams()',idNotificacion.id)
+        
         const id=idNotificacion?.id;
         try {
           const notificacionesService = new NotificacionesService();
         //   const notificacionResponse = await notificacionesService.getNotificacion(id);
           const bitacoraResponse = await notificacionesService.getBitacoraNotificaciones(id);
           const accionesResponse = await notificacionesService.getAccionesAMostrar(id);
-        //   const descargarAdjResponse = await notificacionesService.descargarAdjunto(idNotificacion);
+        //   
           const acuseResponse = await notificacionesService.getAcuseLectura(id);
           const infoNotificacionResponse=await notificacionesService.getNotificacion(id);
   
@@ -51,6 +52,7 @@ useEffect(() => {
           setAcuse(acuseResponse.data);
           setAcciones(accionesResponse.data);
           setInfoNotificacion(infoNotificacionResponse.data)
+          setIdAdj(infoNotificacion?.adjuntos[0]?.id)
           setContenidoPDF(acuse.contenido);
           setNombrePdfAcuse(acuse.nombre)
           setBitacora(bitacoraResponse.data)
@@ -58,9 +60,33 @@ useEffect(() => {
           console.error('Error fetching notification data', error);
         }
       };
-  
+      
       fetchNotificacionData();
     }, [idNotificacion]);
+
+
+    
+console.log('idAdj',idAdj)
+
+// useEffect(() => {
+  function handleDownloadAdjunto() {
+    const fetchAdjunto = async () => {
+      const id = idAdj;
+      console.log('idAdj', idAdj);
+      try {
+        const notificacionesService = new NotificacionesService();
+        const descargarAdjResponse = await notificacionesService.descargarAdjunto(id);
+        setDescargarAdj(descargarAdjResponse.data);
+        console.log('descargarAdjResponse.data', descargarAdjResponse.data);
+      } catch (error) {
+        console.error('Error fetching notification data', error);
+      }
+    };
+    fetchAdjunto();
+  }
+// }, [idAdj]);   
+
+
 
       function handleDownload() {
         const linkSource = `data:application/pdf;base64,${contenidoPDF}`;
@@ -97,7 +123,7 @@ useEffect(() => {
       />
       {/* <h3>Acciones:</h3> */}
       <DevButton onClick={handleDownload}>Descargar acuse de lectura</DevButton>
-      {/* <DevButton onClick={handleDownloadAdjunto}>Descargar Adjunto</DevButton> */}
+      {idAdj&&(<DevButton onClick={handleDownloadAdjunto}>Descargar Adjunto</DevButton>)}
 
     </Layout>
   )
