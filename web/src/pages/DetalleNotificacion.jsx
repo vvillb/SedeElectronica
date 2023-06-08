@@ -62,9 +62,10 @@ const DetalleNotificacion = () => {
     try {
       const notificacionesService = new NotificacionesService();
       const descargarAdjResponse = await notificacionesService.descargarAdjunto(idAdj);
-      setDescargarAdj(descargarAdjResponse.data);
-      setNombrePDFAdjunto(descargarAdjResponse.data.nombre);
-      setContenidoPDFAdjunto(descargarAdjResponse.data.contenido);
+      const adjuntoData = descargarAdjResponse.data;
+      setDescargarAdj(adjuntoData);
+      setNombrePDFAdjunto(adjuntoData.nombre);
+      setContenidoPDFAdjunto(adjuntoData.contenido);
       handleDownloadAdjunto();
     } catch (error) {
       console.error('Error fetching notification data', error);
@@ -83,6 +84,8 @@ const DetalleNotificacion = () => {
   }
 
   function handleDownloadAdjunto() {
+    console.log('contenido',contenidoPDFAdjunto);
+    console.log('nombre',nombrePDFAdjunto)
     const linkSource = `data:application/pdf;base64,${contenidoPDFAdjunto}`;
     const downloadLink = document.createElement('a');
     const fileName = `${nombrePDFAdjunto}`;
