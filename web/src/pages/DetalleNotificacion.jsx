@@ -30,6 +30,10 @@ const[infoNotificacion,setInfoNotificacion]=useState('');
 const[contenidoPDF,setContenidoPDF]=useState('');
 const[nombrePdfAcuse,setNombrePdfAcuse]=useState('');
 const[idAdj,setIdAdj]=useState('');
+const[contenidoPDFAdjunto,setContenidoPDFAdjunto]=useState('');
+const[nombrePDFAdjunto,setNombrePDFAdjunto]=useState('');
+
+
 
 
 useEffect(() => {
@@ -48,14 +52,20 @@ useEffect(() => {
           // Set the data obtained from the responses to the component state
         
           setAcciones(accionesResponse.data);
+          console.log('accionesResponse.data',accionesResponse.data)
         //   setDescargarAdj(descargarAdjResponse.data);
           setAcuse(acuseResponse.data);
-          setAcciones(accionesResponse.data);
+          console.log('acuseResponse.data',acuseResponse.data)
           setInfoNotificacion(infoNotificacionResponse.data)
-          setIdAdj(infoNotificacion?.adjuntos[0]?.id)
+          console.log('infoNotificacionResponse.data',infoNotificacionResponse.data)
+          setIdAdj(infoNotificacion?.adjuntos?.length>0 ? infoNotificacion?.adjuntos[0].id: null)
+          console.log('idAdj',idAdj);
           setContenidoPDF(acuse.contenido);
+          console.log('acuse.contenido',acuse.contenido)
           setNombrePdfAcuse(acuse.nombre)
-          setBitacora(bitacoraResponse.data)
+          console.log('acuse.nombre',acuse.nombre)
+          setBitacora(bitacoraResponse.data);
+          console.log('bitacoraResponse.data',bitacoraResponse.data)
         } catch (error) {
           console.error('Error fetching notification data', error);
         }
@@ -66,10 +76,9 @@ useEffect(() => {
 
 
     
-console.log('idAdj',idAdj)
 
-// useEffect(() => {
-  function handleDownloadAdjunto() {
+
+  function handleClickAdjunto() {
     const fetchAdjunto = async () => {
       const id = idAdj;
       console.log('idAdj', idAdj);
@@ -77,14 +86,20 @@ console.log('idAdj',idAdj)
         const notificacionesService = new NotificacionesService();
         const descargarAdjResponse = await notificacionesService.descargarAdjunto(id);
         setDescargarAdj(descargarAdjResponse.data);
-        console.log('descargarAdjResponse.data', descargarAdjResponse.data);
+        
       } catch (error) {
         console.error('Error fetching notification data', error);
       }
     };
+
+    console.log('descargarAdj',descargarAdj.nombre)
+    
     fetchAdjunto();
+    setNombrePDFAdjunto(descargarAdj.nombre);
+    setContenidoPDFAdjunto(descargarAdj.contenido)
+    handleDownloadAdjunto();
   }
-// }, [idAdj]);   
+
 
 
 
@@ -99,17 +114,17 @@ console.log('idAdj',idAdj)
         document.body.removeChild(downloadLink);
       }
 
-      // function handleDownloadAdjunto() {
-      //   const linkSource = `data:application/pdf;base64,${contenidoPDFAdjunto}`;
-      //   const downloadLink = document.createElement('a');
-      //   const fileName = 'acuse.pdf';
-      //   downloadLink.href = linkSource;
-      //   downloadLink.download = fileName;
+      function handleDownloadAdjunto() {
+        const linkSource = `data:application/pdf;base64,${contenidoPDFAdjunto}`;
+        const downloadLink = document.createElement('a');
+        const fileName = `${nombrePDFAdjunto}`;
+        downloadLink.href = linkSource;
+        downloadLink.download = fileName;
       
-      //   document.body.appendChild(downloadLink);
-      //   downloadLink.click();
-      //   document.body.removeChild(downloadLink);
-      // }
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      }
 
     const columns=['id','accion','fecha','estado_Resultante']
   return (
@@ -123,7 +138,7 @@ console.log('idAdj',idAdj)
       />
       {/* <h3>Acciones:</h3> */}
       <DevButton onClick={handleDownload}>Descargar acuse de lectura</DevButton>
-      {idAdj&&(<DevButton onClick={handleDownloadAdjunto}>Descargar Adjunto</DevButton>)}
+      {idAdj&&(<DevButton onClick={handleClickAdjunto}>Descargar Adjunto</DevButton>)}
 
     </Layout>
   )
