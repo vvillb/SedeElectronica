@@ -9,6 +9,4 @@ function Menu(props) {
     </div>
   )
 }
-
-
 export default Menu

@@ -22,8 +22,6 @@ export default defineConfig({
           '@client-TypeScriptLayout':path.resolve(__dirname,'../plugins/client1/TypeScriptLayout.tsx'),
           '@client-AtencionMenuData':path.resolve(__dirname,'../../src/plugins/client1/components/data/AtencionSubMenuData.jsx'),
           '@client-CarpetaMenuData':path.resolve(__dirname,'../../src/plugins/client1/components/data/CarpetaCiudadanaSubmenuData.jsx'),
-
-
       },
     },
     define: {

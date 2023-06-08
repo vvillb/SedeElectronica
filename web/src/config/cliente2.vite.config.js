@@ -25,5 +25,9 @@ export default defineConfig({
 
 
       }
-    }
+    },
+    define: {
+      'process.env': {
+        API_URL: 'https://localhost:7041',
+    },}
 })

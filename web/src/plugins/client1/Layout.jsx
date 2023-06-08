@@ -10,9 +10,6 @@ import 'devextreme/dist/css/dx.greenmist.css';
 import Breadcrumbs from './components/Breadcrumbs';
 
 function Layout({children}) {
-    
-
-
   return (
     <div id="page">   
       <div className="flex flex-col min-h-screen">
@@ -25,12 +22,10 @@ function Layout({children}) {
         <Menu orientation='horizontal'/>
       </nav>
 
-{/*       <div>
-        <Breadcrumbs/>
+      <div>
+      <Breadcrumbs/>
       </div>
- */}<div>
-  <Breadcrumbs/>
- </div>
+
       <div className="flex-grow flex">
         <nav className="w-48 hidden sm:visible sm:block dx-theme-border-color-as-background-color">
           <Menu orientation='vertical'/>
@@ -47,6 +42,4 @@ function Layout({children}) {
     </div>
 );
 }
-
-
 export default Layout;

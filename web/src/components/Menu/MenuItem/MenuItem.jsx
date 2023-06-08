@@ -5,7 +5,6 @@ import { Menu } from 'devextreme-react';
 import { Item } from 'devextreme-react/accordion';
 
 
-
 function MenuItem(props) {
 
     const navigate = useNavigate();
@@ -13,12 +12,10 @@ function MenuItem(props) {
     const updateRoute = (path) => {
         navigate(path)
     }
-
     const handleClick=(evento)=>{
         if (evento?.itemData?.path)
         updateRoute(evento.itemData.path)
     }
-
     return (
             <div id="container">
                 <Menu
@@ -39,5 +36,4 @@ function MenuItem(props) {
             </div>
     );
 }
-
 export default MenuItem
