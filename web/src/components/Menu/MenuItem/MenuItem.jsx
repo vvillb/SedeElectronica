@@ -19,6 +19,7 @@ function MenuItem(props) {
     return (
             <div id="container">
                 <Menu
+                showFirstSubmenuMode='onHover'
                     onItemClick={handleClick}
                     adaptivityEnabled={true}
                     // eslint-disable-next-line react/prop-types
