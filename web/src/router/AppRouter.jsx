@@ -17,18 +17,18 @@ import DetalleNotificacion from '../pages/DetalleNotificacion'
 function AppRouter() {
   return (
         <Routes>
-            <Route path='/atencion' element={<AtencionPage/>}/> 
+            <Route path='/atencion' id='atencion' element={<AtencionPage/>}/> 
             <Route path='*' element={<LoginPage/>}/> 
-            <Route path='/CarpetaCiudadana' element={<ServicesPage/>}/> 
-            <Route path='/AtencionEInformacion/Catalogo' element={<Catalogo/>}/>
-            <Route path='/AtencionEInformacion/Quejas' element={<Quejas/>}/>
-            <Route path='/AtencionEInformacion/Tablon' element={<Tablon/>}/>
-            <Route path='/AtencionEInformacion/Verificacion' element={<Verificacion/>}/>
-            <Route path='/CarpetaCiudadana/MisDocumentos' element={<MisDocumentos/>}/>
-            <Route path='/CarpetaCiudadana/MisExpedientes' element={<MisExpedientes/>}/>
-            <Route path='/CarpetaCiudadana/MisNotificaciones' element={<MisNotificaciones/>}/>
-            <Route path='/CarpetaCiudadana/MisSolicitudes' element={<MisSolicitudes/>}/>
-            <Route path="/MisNotificaciones/:id" element={<DetalleNotificacion/>}/>
+            <Route path='/CarpetaCiudadana' id='CarpetaCiudadana' element={<ServicesPage/>}/> 
+            <Route path='/AtencionEInformacion/Catalogo' id='Catalogo' element={<Catalogo/>}/>
+            <Route path='/AtencionEInformacion/Quejas' id='Quejas' element={<Quejas/>}/>
+            <Route path='/AtencionEInformacion/Tablon' id='Tablon' element={<Tablon/>}/>
+            <Route path='/AtencionEInformacion/Verificacion' id='Verificacion' element={<Verificacion/>}/>
+            <Route path='/CarpetaCiudadana/MisDocumentos' id='MisDocumentos' element={<MisDocumentos/>}/>
+            <Route path='/CarpetaCiudadana/MisExpedientes' id='MisExpedientes' element={<MisExpedientes/>}/>
+            <Route path='/CarpetaCiudadana/MisNotificaciones' id='MisNotificaciones' element={<MisNotificaciones/>}/>
+            <Route path='/CarpetaCiudadana/MisSolicitudes' id='MisSolicitudes' element={<MisSolicitudes/>}/>
+            <Route path="/MisNotificaciones/:id" id=':id' element={<DetalleNotificacion/>}/>
         </Routes>
   )
 }

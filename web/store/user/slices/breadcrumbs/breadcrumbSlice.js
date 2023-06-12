@@ -7,8 +7,12 @@ export const breadcrumbSlice = createSlice({
     addBreadcrumbs(state,action){
       const{label}=action.payload;
       const path=window.location.pathname;
+      const pathArray=path.split("/");
+      const ubi=pathArray[pathArray.length-1]
+      console.log('ubi',ubi)
+      console.log('pathArray',pathArray)
       if (!(state.length>0 && state[state.length - 1].path===path)){
-        state.push({path,label});
+        state.push({path,ubi,label});
       }
     },
     clearBreadcrumbs(state){

@@ -14,6 +14,8 @@ function MisNotificaciones() {
 
   const dispatch = useDispatch();
 
+  
+
   ///for fetching notificaciones/////
 const [inputValue, setInputValue] = useState('');
   const service = new NotificacionesService(); // Instantiate the service
@@ -79,13 +81,14 @@ const transformedData = notificaciones?.datos?.filas.map((fila) => {
 
 const navigate=useNavigate();
 
-const handleVerDetalle = () => {
-  const selectedNotificationId = transformedData[0]?.Id;
-  navigate(`/MisNotificaciones/${selectedNotificationId}`);
+const handleVerDetalle = (Id) => {
+
+  navigate(`/MisNotificaciones/${Id}`);
 };
 
 
 const ItemTemplate = (data) => {
+  console.log(data)
   return (
     <div className='flex'>
       <table>
@@ -98,7 +101,7 @@ const ItemTemplate = (data) => {
           ))}
         </tbody>
       </table>
-      <DevButton className='dx-fieldset' onClick={handleVerDetalle}>
+      <DevButton className='dx-fieldset' onClick={()=>handleVerDetalle(data.Id)}>
         ver detalle
       </DevButton>
     </div>

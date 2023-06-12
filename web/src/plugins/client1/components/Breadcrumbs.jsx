@@ -58,18 +58,7 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
 ////////////////////////////////////////////////////
 
 
-  useEffect(() => {
-    const handlePopState = () => {
-      if (breadcrumbs.length > 0) {
-        dispatch(clearBreadcrumbs());
-      }
-    };
-    window.addEventListener('popstate', handlePopState);
 
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, []);
 
   const breadcrumbs = useSelector((state) => state.breadcrumbs);
 
@@ -77,7 +66,7 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
    <>
     <div className="flex items-center bg-gray-800 py-2 px-4">
    
-      <Link to="/" className="text-gray-300 hover:text-gray-500">Ir a la página anterior</Link>
+      <Link to="/" className="text-gray-300 hover:text-gray-500">Ir a la página de inicio</Link>
 
       
      
@@ -86,9 +75,9 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
           {breadcrumbs.map((item, index) => (
             <span key={index}>
               <Link to={item.path} className="text-gray-300 hover:text-gray-500">
-                {item.path}
+                {item.ubi}
               </Link>
-              {index < breadcrumbs.length - 1 && <span className="text-gray-300 mx-2"></span>}
+              {index < breadcrumbs.length - 1 && <span className="text-gray-300 mx-2">/</span>}
             </span>
           ))}
         </ol>

@@ -35,13 +35,14 @@ const DetalleNotificacion = () => {
         const notificacionesService = new NotificacionesService();
         const bitacoraResponse = await notificacionesService.getBitacoraNotificaciones(id);
         const accionesResponse = await notificacionesService.getAccionesAMostrar(id);
-        const acuseResponse = await notificacionesService.getAcuseLectura(id);
+        // const acuseResponse = await notificacionesService.getAcuseLectura(id);
         const infoNotificacionResponse = await notificacionesService.getNotificacion(id);
 
         setBitacora(bitacoraResponse.data);
         setAcciones(accionesResponse.data);
-        setAcuse(acuseResponse.data);
+        // setAcuse(acuseResponse.data);
         setInfoNotificacion(infoNotificacionResponse.data);
+        setIdAdj(infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
       } catch (error) {
         console.error('Error fetching notification data', error);
       }
@@ -103,7 +104,7 @@ const DetalleNotificacion = () => {
       <h1>Notificación {idNotificacion.id}</h1>
       <h3>Bitácora:</h3>
       <DataGrid dataSource={bitacora} columns={columns} showBorders={true} />
-      <DevButton onClick={handleDownload}>Descargar acuse de lectura</DevButton>
+      {acuse&&<DevButton onClick={handleDownload}>Descargar acuse de lectura</DevButton>}
       {idAdj && <DevButton onClick={handleClickAdjunto}>Descargar Adjunto</DevButton>}
     </Layout>
   );
