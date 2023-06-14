@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Layout from '@client-layout';
 import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -30,28 +30,34 @@ useEffect(() => {
   const [nombrePDFAdjunto, setNombrePDFAdjunto] = useState('');
   const [descargarAdj, setDescargarAdj] = useState('');
 
+
+
+const fetchNotificacionData=useCallback(async () => {
+  const id = idNotificacion?.id;
+   {
+    const notificacionesService = new NotificacionesService();
+    const bitacoraResponse = await notificacionesService.getBitacoraNotificaciones(id);
+    const accionesResponse = await notificacionesService.getAccionesAMostrar(id);
+    // const acuseResponse = await notificacionesService.getAcuseLectura(id);
+    const infoNotificacionResponse = await notificacionesService.getNotificacion(id);
+
+    setBitacora(bitacoraResponse.data);
+    setAcciones(accionesResponse.data);
+    // setAcuse(acuseResponse.data);
+    setInfoNotificacion(infoNotificacionResponse.data);
+    setIdAdj(infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
+  }
+}, []);
+
   useEffect(() => {
-    const fetchNotificacionData = async () => {
-      const id = idNotificacion?.id;
-      try {
-        const notificacionesService = new NotificacionesService();
-        const bitacoraResponse = await notificacionesService.getBitacoraNotificaciones(id);
-        const accionesResponse = await notificacionesService.getAccionesAMostrar(id);
-        // const acuseResponse = await notificacionesService.getAcuseLectura(id);
-        const infoNotificacionResponse = await notificacionesService.getNotificacion(id);
+    fetchNotificacionData()
+      .catch ( console.error('Error fetching notification data'))     
+      
+  }, [fetchNotificacionData]);
 
-        setBitacora(bitacoraResponse.data);
-        setAcciones(accionesResponse.data);
-        // setAcuse(acuseResponse.data);
-        setInfoNotificacion(infoNotificacionResponse.data);
-        setIdAdj(infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
-      } catch (error) {
-        console.error('Error fetching notification data', error);
-      }
-    };
 
-    fetchNotificacionData();
-  }, [idNotificacion]);
+
+
 
   useEffect(() => {
     if (acuse) {
@@ -87,8 +93,7 @@ useEffect(() => {
   }
 
   function handleDownloadAdjunto() {
-    console.log('contenido',contenidoPDFAdjunto);
-    console.log('nombre',nombrePDFAdjunto)
+    
     const linkSource = `data:application/pdf;base64,${contenidoPDFAdjunto}`;
     const downloadLink = document.createElement('a');
     const fileName = `${nombrePDFAdjunto}`;
@@ -100,7 +105,7 @@ useEffect(() => {
   }
 
   const columns = ['id', 'accion', 'fecha', 'estado_Resultante'];
-
+  
   return (
     <Layout>
       <h1>Notificación {idNotificacion.id}</h1>
