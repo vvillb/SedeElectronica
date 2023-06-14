@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '@client-layout';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
-import NotificacionesService from '../services/NotificacionesServices/NotificacionesService';
+import { addBreadcrumbs } from '../../../store/user/slices/breadcrumbs/breadcrumbSlice';
+import NotificacionesService from '../../services/NotificacionesServices/NotificacionesService';
 import { DataGrid } from 'devextreme-react';
 import { Button as DevButton } from 'devextreme-react';
 
@@ -11,11 +11,13 @@ const DetalleNotificacion = () => {
   const dispatch = useDispatch();
   let idNotificacion = useParams();
 
-  useEffect(() => {
-    // Add a new breadcrumb element
-    const label = 'Nueva página';
-    dispatch(addBreadcrumbs({ label }));
-  }, [dispatch, idNotificacion]);
+/////////////////////////////////
+useEffect(() => {
+  // Add a new breadcrumb element
+  const label = 'Nueva página';
+  dispatch(addBreadcrumbs({ label }));
+}, [dispatch]);
+////////////////////////////////////
 
   const [bitacora, setBitacora] = useState('');
   const [acciones, setAcciones] = useState('');

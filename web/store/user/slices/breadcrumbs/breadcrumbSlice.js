@@ -5,9 +5,7 @@ export const breadcrumbSlice = createSlice({
   initialState: [],
   reducers:{
     addBreadcrumbs(state,action){
-      const t0=performance.now();
-      console.log('t0(antes de despachar)',t0)
-
+   
 
       const{label}=action.payload;
       const path=window.location.pathname;
@@ -17,9 +15,6 @@ export const breadcrumbSlice = createSlice({
         state.push({path,ubi,label});
       }
 
-      const t1=performance.now();
-      console.log('t1(después de despachar)',t1)
-      console.log('tiempo de la acción:',t1-t0)
     },
     clearBreadcrumbs(state){
       state.splice(0,state.length);

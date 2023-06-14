@@ -94,7 +94,7 @@ const handleVerDetalle = (Id) => {
 
 
 const ItemTemplate = (data) => {
-  console.log(data)
+  
   return (
     <div className='flex'>
       <table>

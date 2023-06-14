@@ -11,7 +11,7 @@ import LoginPage from '../pages/LoginPage'
 import ServicesPage from '../pages/ServicesPage'
 import Verificacion from '../pages/AtencionEInformacion/Verificacion'
 import AtencionPage from '../pages/AtencionPage'
-import DetalleNotificacion from '../pages/DetalleNotificacion'
+import DetalleNotificacion from '../pages/subpages/DetalleNotificacion'
 
 
 function AppRouter() {
