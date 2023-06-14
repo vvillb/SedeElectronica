@@ -68,7 +68,13 @@ const transformedData = notificaciones?.datos?.filas.map((fila) => {
     const campo = notificaciones?.datos?.campos[index];
 
     if (campo.tipo === "DateTimeOffset" || campo.tipo === "DateTime") {
-      rowData[fieldName] = formatDate(valor);
+      if(valor===""){
+        rowData[fieldName] = 'N/A';
+        
+      }else{
+        rowData[fieldName] = formatDate(valor);
+      }
+      
     } else {
       rowData[fieldName] = valor;
     }

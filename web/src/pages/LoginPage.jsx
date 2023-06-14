@@ -35,7 +35,7 @@ function LoginPage() {
   }
 
   const futufirmaAutenticacionRecibida=(datos)=> {
-  
+   
     dispatch( getLoginUser({ certificadoFirma: datos.certificadoFirma, firma: datos.firma }) )
     
 }
@@ -47,11 +47,11 @@ function LoginPage() {
 
   const autenticar = (datos) => { 
 
-
+    console.log('usuario:', user.nombre)
     futufirma.onRespuesta = futufirmaAutenticacionRecibida;
     futufirma.autenticar();    
     dispatch(getLoginUser(datos.certificadoFirma, datos.firma))
-    
+    console.log('usuario:', user.nombre)
    
   }
   const logout = () => {
