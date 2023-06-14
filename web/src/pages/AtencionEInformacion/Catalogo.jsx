@@ -18,7 +18,7 @@ useEffect(() => {
 
     return (
       <Layout>
-          <div>
+        <div>
          <h1>Catálogo de servicios</h1>
         </div>
         <div>

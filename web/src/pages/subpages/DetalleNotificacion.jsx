@@ -33,19 +33,22 @@ useEffect(() => {
 
 
 const fetchNotificacionData=useCallback(async () => {
-  const id = idNotificacion?.id;
-   {
+  try{
+    const id = idNotificacion?.id;
     const notificacionesService = new NotificacionesService();
     const bitacoraResponse = await notificacionesService.getBitacoraNotificaciones(id);
     const accionesResponse = await notificacionesService.getAccionesAMostrar(id);
-    //const acuseResponse = await notificacionesService.getAcuseLectura(id);
     const infoNotificacionResponse = await notificacionesService.getNotificacion(id);
-
+    console.log('bitacoraResponse.data',bitacoraResponse.data);
+    console.log('accionesResponse.data',accionesResponse.data);
+    console.log('(infoNotificacionResponse.data',infoNotificacionResponse.data);
+    console.log('infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null',infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
     setBitacora(bitacoraResponse.data);
     setAcciones(accionesResponse.data);
-    //setAcuse(acuseResponse.data);
     setInfoNotificacion(infoNotificacionResponse.data);
     setIdAdj(infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
+  }catch (error) {
+    console.error('Error fetching notification data', error);
   }
 }, []);
 
@@ -53,32 +56,37 @@ const fetchNotificacionData=useCallback(async () => {
 //fetch acuse si la fecha de lectura existe
   useEffect(() => {
     fetchNotificacionData()
-      .catch ( console.error('Error fetching notification data'))     
+        
       if(infoNotificacion.fecha_Lectura)
       {fetchAcuse()
-        .catch ( console.error('Error fetching acuse'))     
+           
       }else{
         return
       }
       
   }, [fetchNotificacionData]);
 
+
+
   const fetchAcuse=useCallback(async () => {
-    const id = idNotificacion?.id;
-     {
+    try{
+      const id = idNotificacion?.id;
       const notificacionesService = new NotificacionesService();
       const acuseResponse = await notificacionesService.getAcuseLectura(id);
     
       setAcuse(acuseResponse.data);
      
+    } catch (error) {
+      console.error('Error fetching acuse', error);
     }
   }, []);
 
 
 
   useEffect(() => {
+    setIdAdj(infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
     if (acuse) {
-      setIdAdj(infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
+      
       setContenidoPDF(acuse.contenido);
       setNombrePdfAcuse(acuse.nombre);
     }
@@ -94,7 +102,7 @@ const fetchNotificacionData=useCallback(async () => {
       setContenidoPDFAdjunto(adjuntoData.contenido);
       handleDownloadAdjunto();
     } catch (error) {
-      console.error('Error fetching notification data', error);
+      console.error('Error fetching adjunto', error);
     }
   }
 
@@ -122,8 +130,8 @@ const fetchNotificacionData=useCallback(async () => {
   }
 
   const columns = ['id', 'accion', 'fecha', 'estado_Resultante'];
-  console.log('acuse',acuse)
-  console.log('idAdj',idAdj)
+  // console.log('acuse',acuse)
+  // console.log('idAdj',idAdj)
   return (
     <Layout>
       <h1>Notificación {idNotificacion.id}</h1>
