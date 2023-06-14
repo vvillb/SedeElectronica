@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Layout from '@client-layout';
 import { useDispatch } from 'react-redux';
 import { addBreadcrumbs } from '../../../store/user/slices/breadcrumbs/breadcrumbSlice';
@@ -17,15 +17,17 @@ function MisNotificaciones() {
   
 
   ///for fetching notificaciones/////
-const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const service = new NotificacionesService(); // Instantiate the service
 
-const [notificaciones, setNotificaciones] = useState([{datos:{campos:'campos'}}]);
-const [notificationId,setNotificationId]=useState('')
+  const [notificaciones, setNotificaciones] = useState([{datos:{campos:'campos'}}]);
+  const [notificationId,setNotificationId]=useState('')
 
 
-  useEffect(() => {
-    const fetchNotificaciones = async () => {
+  const fetchNotificaciones=useCallback(
+    
+    async()=>{
+      
       try {
         const notificacionesService = new NotificacionesService();
         const {data }= await notificacionesService.obtenerNotificaciones();
@@ -34,11 +36,26 @@ const [notificationId,setNotificationId]=useState('')
         
       } catch (error) {
         console.error('Error al obtener las notificaciones', error);
-      }
+      }  
      
-     
-    };
+    },[setNotificaciones]);
 
+
+
+  useEffect(() => {
+    // const fetchNotificaciones = async () => {
+    //   try {
+    //     const notificacionesService = new NotificacionesService();
+    //     const {data }= await notificacionesService.obtenerNotificaciones();
+    //     setNotificaciones(data);
+        
+        
+    //   } catch (error) {
+    //     console.error('Error al obtener las notificaciones', error);
+    //   }
+     
+     
+    // };
     fetchNotificaciones();
   }, []);
 
