@@ -17,9 +17,7 @@ function MisNotificaciones() {
   
 
   ///for fetching notificaciones/////
-  const [inputValue, setInputValue] = useState('');
   const service = new NotificacionesService(); // Instantiate the service
-
   const [notificaciones, setNotificaciones] = useState([{datos:{campos:'campos'}}]);
   const [notificationId,setNotificationId]=useState('')
 
@@ -29,8 +27,7 @@ function MisNotificaciones() {
     async()=>{
       
       try {
-        const notificacionesService = new NotificacionesService();
-        const {data }= await notificacionesService.obtenerNotificaciones();
+        const {data }= await service.obtenerNotificaciones();
         setNotificaciones(data);
         
         
@@ -38,24 +35,12 @@ function MisNotificaciones() {
         console.error('Error al obtener las notificaciones', error);
       }  
      
-    },[setNotificaciones]);
+    },[service]);
 
 
 
   useEffect(() => {
-    // const fetchNotificaciones = async () => {
-    //   try {
-    //     const notificacionesService = new NotificacionesService();
-    //     const {data }= await notificacionesService.obtenerNotificaciones();
-    //     setNotificaciones(data);
-        
-        
-    //   } catch (error) {
-    //     console.error('Error al obtener las notificaciones', error);
-    //   }
-     
-     
-    // };
+
     fetchNotificaciones();
   }, []);
 
