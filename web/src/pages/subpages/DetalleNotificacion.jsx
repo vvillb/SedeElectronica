@@ -131,7 +131,7 @@ function checkAcuse(){
   }
   
   function handleDownloadAcuse() {
-    const linkSource = `data:application/pdf;base64,${setContenidoPDFAcuse}`;
+    const linkSource = `data:application/pdf;base64,${contenidoPDFAcuse}`;
     const downloadLink = document.createElement('a');
     const fileName = `${nombrePdfAcuse}`;
     downloadLink.href = linkSource;
