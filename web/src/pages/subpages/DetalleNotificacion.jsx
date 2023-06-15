@@ -23,13 +23,13 @@ useEffect(() => {
   const [acciones, setAcciones] = useState('');
   const [acuse, setAcuse] = useState(null);
   const [infoNotificacion, setInfoNotificacion] = useState('');
-  const [contenidoPDF, setContenidoPDF] = useState('');
+  const [contenidoPDFAcuse, setContenidoPDFAcuse] = useState('');
   const [nombrePdfAcuse, setNombrePdfAcuse] = useState('');
   const [idAdj, setIdAdj] = useState('');
   const [contenidoPDFAdjunto, setContenidoPDFAdjunto] = useState('');
   const [nombrePDFAdjunto, setNombrePDFAdjunto] = useState('');
   const [descargarAdj, setDescargarAdj] = useState('');
-
+  const [acuseExiste,setAcuseExiste]=useState(false)
 
 
 const fetchNotificacionData=useCallback(async () => {
@@ -39,10 +39,10 @@ const fetchNotificacionData=useCallback(async () => {
     const bitacoraResponse = await notificacionesService.getBitacoraNotificaciones(id);
     const accionesResponse = await notificacionesService.getAccionesAMostrar(id);
     const infoNotificacionResponse = await notificacionesService.getNotificacion(id);
-    console.log('bitacoraResponse.data',bitacoraResponse.data);
-    console.log('accionesResponse.data',accionesResponse.data);
-    console.log('(infoNotificacionResponse.data',infoNotificacionResponse.data);
-    console.log('infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null',infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
+    // console.log('bitacoraResponse.data',bitacoraResponse.data);
+    // console.log('accionesResponse.data',accionesResponse.data);
+    // console.log('(infoNotificacionResponse.data',infoNotificacionResponse.data);
+    // console.log('infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null',infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
     setBitacora(bitacoraResponse.data);
     setAcciones(accionesResponse.data);
     setInfoNotificacion(infoNotificacionResponse.data);
@@ -50,21 +50,32 @@ const fetchNotificacionData=useCallback(async () => {
   }catch (error) {
     console.error('Error fetching notification data', error);
   }
+  
 }, []);
 
 
+useEffect(()=>{
+  checkAcuse();
+},[infoNotificacion])
+function checkAcuse(){
+  if(infoNotificacion.fecha_Lectura){
+    setAcuseExiste(true);
+    console.log('check acuse triggered',acuseExiste)
+
+  }
+}
 //fetch acuse si la fecha de lectura existe
   useEffect(() => {
     fetchNotificacionData()
         
       if(infoNotificacion.fecha_Lectura)
       {fetchAcuse()
-           
+           console.log('after fetch acuse',acuse)
       }else{
         return
       }
       
-  }, [fetchNotificacionData]);
+  }, [acuseExiste]);
 
 
 
@@ -85,12 +96,11 @@ const fetchNotificacionData=useCallback(async () => {
 
   useEffect(() => {
     setIdAdj(infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
-    if (acuse) {
-      
-      setContenidoPDF(acuse.contenido);
-      setNombrePdfAcuse(acuse.nombre);
-    }
-  }, [acuse, infoNotificacion]);
+    setContenidoPDFAcuse(acuse?acuse.contenido:null);
+    setNombrePdfAcuse(acuse?acuse.nombre:null);
+
+    
+  }, [ acuse,infoNotificacion]);
 
   async function handleClickAdjunto() {
     try {
@@ -106,22 +116,24 @@ const fetchNotificacionData=useCallback(async () => {
     }
   }
 
-  function handleDownload() {
-    const linkSource = `data:application/pdf;base64,${contenidoPDF}`;
-    const downloadLink = document.createElement('a');
-    const fileName = `${nombrePdfAcuse}`;
-    downloadLink.href = linkSource;
-    downloadLink.download = fileName;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  }
+  
 
   function handleDownloadAdjunto() {
     
     const linkSource = `data:application/pdf;base64,${contenidoPDFAdjunto}`;
     const downloadLink = document.createElement('a');
     const fileName = `${nombrePDFAdjunto}`;
+    downloadLink.href = linkSource;
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+  
+  function handleDownloadAcuse() {
+    const linkSource = `data:application/pdf;base64,${setContenidoPDFAcuse}`;
+    const downloadLink = document.createElement('a');
+    const fileName = `${nombrePdfAcuse}`;
     downloadLink.href = linkSource;
     downloadLink.download = fileName;
     document.body.appendChild(downloadLink);
@@ -137,7 +149,7 @@ const fetchNotificacionData=useCallback(async () => {
       <h1>Notificación {idNotificacion.id}</h1>
       <h3>Bitácora:</h3>
       <DataGrid dataSource={bitacora} columns={columns} showBorders={true} />
-      {acuse &&<DevButton onClick={handleDownload}>Descargar acuse de lectura</DevButton>}
+      {acuse &&<DevButton onClick={handleDownloadAcuse}>Descargar acuse de lectura</DevButton>}
       {idAdj && <DevButton onClick={handleClickAdjunto}>Descargar Adjunto</DevButton>}
     </Layout>
   );
