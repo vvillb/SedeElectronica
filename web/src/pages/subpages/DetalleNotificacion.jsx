@@ -25,7 +25,7 @@ useEffect(() => {
   const [infoNotificacion, setInfoNotificacion] = useState('');
   const [contenidoPDFAcuse, setContenidoPDFAcuse] = useState('');
   const [nombrePdfAcuse, setNombrePdfAcuse] = useState('');
-  const [idAdj, setIdAdj] = useState('');
+  const [idAdj, setIdAdj] = useState(null);
   const [contenidoPDFAdjunto, setContenidoPDFAdjunto] = useState('');
   const [nombrePDFAdjunto, setNombrePDFAdjunto] = useState('');
   const [descargarAdj, setDescargarAdj] = useState('');
@@ -53,10 +53,13 @@ const fetchNotificacionData=useCallback(async () => {
   
 }, []);
 
-
+//un use effect que busca el contenido del acuse cuando se actualiza la información de la notificación
+//así lograr que el botón de descaragar acuse aparezca de primeras (si existe fecha de lectura)
 useEffect(()=>{
   checkAcuse();
 },[infoNotificacion])
+
+
 function checkAcuse(){
   if(infoNotificacion.fecha_Lectura){
     setAcuseExiste(true);
@@ -64,17 +67,19 @@ function checkAcuse(){
 
   }
 }
+
 //fetch acuse si la fecha de lectura existe
   useEffect(() => {
-    fetchNotificacionData()
-        
+     fetchNotificacionData()
+        //se hace fetch de la notificacion 
       if(infoNotificacion.fecha_Lectura)
+      //si tiene fecha de lectura se hace feych del acuse
       {fetchAcuse()
            console.log('after fetch acuse',acuse)
       }else{
         return
       }
-      
+   //este use effect es lanzado cuando cambia el valor de acuseExiste, es decir, cuando se comprueba que hay fecha de lectura   
   }, [acuseExiste]);
 
 
@@ -93,28 +98,43 @@ function checkAcuse(){
   }, []);
 
 
-
+//use effect para actualizar el contenido de los documentos
   useEffect(() => {
     setIdAdj(infoNotificacion?.adjuntos?.length > 0 ? infoNotificacion?.adjuntos[0].id : null);
     setContenidoPDFAcuse(acuse?acuse.contenido:null);
     setNombrePdfAcuse(acuse?acuse.nombre:null);
-
     
   }, [ acuse,infoNotificacion]);
 
-  async function handleClickAdjunto() {
-    try {
-      const notificacionesService = new NotificacionesService();
-      const descargarAdjResponse = await notificacionesService.descargarAdjunto(idAdj);
-      const adjuntoData = descargarAdjResponse.data;
-      setDescargarAdj(adjuntoData);
-      setNombrePDFAdjunto(adjuntoData.nombre);
-      setContenidoPDFAdjunto(adjuntoData.contenido);
-      handleDownloadAdjunto();
-    } catch (error) {
-      console.error('Error fetching adjunto', error);
+
+
+  const fetchAdjunto=useCallback(
+
+    async()=> {
+        try {
+          const notificacionesService = new NotificacionesService();
+          const descargarAdjResponse = await notificacionesService.descargarAdjunto(idAdj);
+          const adjuntoData = descargarAdjResponse.data;
+          setDescargarAdj(adjuntoData);
+          setNombrePDFAdjunto(adjuntoData.nombre);
+          setContenidoPDFAdjunto(adjuntoData.contenido);
+          
+        } catch (error) {
+          console.error('Error fetching adjunto', error);
+        }
+      }
+  )
+
+  //un use Effect que se lanza cuando llegue la notificacion y haga el fetch del adjunto
+
+  useEffect(()=>{
+    if (idAdj){fetchAdjunto();
+    console.log('idAdj',idAdj)
     }
-  }
+    
+
+  }, [ idAdj])
+  
 
   
 
@@ -150,7 +170,7 @@ function checkAcuse(){
       <h3>Bitácora:</h3>
       <DataGrid dataSource={bitacora} columns={columns} showBorders={true} />
       {acuse &&<DevButton onClick={handleDownloadAcuse}>Descargar acuse de lectura</DevButton>}
-      {idAdj && <DevButton onClick={handleClickAdjunto}>Descargar Adjunto</DevButton>}
+      {idAdj && <DevButton onClick={handleDownloadAdjunto}>Descargar Adjunto</DevButton>}
     </Layout>
   );
 };
