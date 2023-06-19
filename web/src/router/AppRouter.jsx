@@ -1,5 +1,5 @@
 import React from 'react'
-import {Routes, Route, Link, createBrowserRouter} from 'react-router-dom'
+import {Routes, Route, Link, createBrowserRouter, useLocation} from 'react-router-dom'
 import Catalogo from '../pages/AtencionEInformacion/Catalogo'
 import Quejas from '../pages/AtencionEInformacion/Quejas'
 import Tablon from '../pages/AtencionEInformacion/Tablon'
@@ -19,11 +19,11 @@ import DetalleNotificacion from '../pages/subpages/DetalleNotificacion'
     element: <LoginPage />,
   },
   {
-    path: "/atencion",
-    id: "atencion",
+    path: "/AtencionEInformacion",
+    id: "AtencionEInformacion",
     element: <AtencionPage />,
     handle: {
-      crumb: () => <Link to="/atencion">Atención</Link>,
+      crumb: () => <Link to="/AtencionEInformacion">Atención</Link>,
     },
   },
   {
@@ -117,6 +117,8 @@ import DetalleNotificacion from '../pages/subpages/DetalleNotificacion'
     },
   },
 ]);
+
+
 
 
 

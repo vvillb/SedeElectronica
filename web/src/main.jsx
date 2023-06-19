@@ -10,8 +10,6 @@ import  router from './router/AppRouter';
 
 
 
-
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <Provider store={store}>

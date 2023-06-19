@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, unstable_HistoryRouter, useMatches } from 'react-router-dom';
+import { Link, unstable_HistoryRouter, useLocation, useMatches } from 'react-router-dom';
 import { clearBreadcrumbs } from '../../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import futufirma from '../../../utils/futufirma';
 import { getLoginUser, setLogoutUser } from '../../../../store/user/slices/user/userSlice';
@@ -59,13 +59,24 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
 
 
 
-  let matches=useMatches();
-  let crumbs=matches
-    // first get rid of any matches that don't have handle and crumb
-    .filter((match) => Boolean(match.handle?.crumb))
-    // now map them into an array of elements, passing the loader
-    // data to each one
-    .map((match) => match.handle.crumb(match.data));
+const location=useLocation();
+let currentLink=''
+
+const crumbs=location.pathname.split('/')
+  .filter(crumb=>crumb!=='')
+  .map(crumb=>{
+    currentLink+=`/${crumb}`
+
+    return(
+      <div key={crumb}>
+        <Link to={currentLink}>&gt;{crumb}</Link>
+      </div>
+    )
+      
+    
+  })
+
+
 
   const breadcrumbs = useSelector((state) => state.breadcrumbs);
 
@@ -77,12 +88,10 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
 
       
      
-      <nav className="w-full pl-32">
-      <ol>
-        {crumbs.map((crumb, index) => (
-          <li key={index}>{crumb}</li>
-        ))}
-      </ol>
+      <nav className="w-full pl-32 flex">
+      
+        {crumbs}
+      
       </nav>
         <div className=' flex  items-center'>
         {isLoading?(

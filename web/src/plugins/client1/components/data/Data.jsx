@@ -1,7 +1,7 @@
 
 const products = [{
     id: '1',
-    path:'/atencion',
+    path:'/AtencionEInformacion',
     name: 'Atención e información ',
     subItems: [{
       id: '1_1',
