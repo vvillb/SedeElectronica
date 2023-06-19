@@ -1,5 +1,5 @@
 import React from 'react'
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, Link, createBrowserRouter} from 'react-router-dom'
 import Catalogo from '../pages/AtencionEInformacion/Catalogo'
 import Quejas from '../pages/AtencionEInformacion/Quejas'
 import Tablon from '../pages/AtencionEInformacion/Tablon'
@@ -13,24 +13,114 @@ import Verificacion from '../pages/AtencionEInformacion/Verificacion'
 import AtencionPage from '../pages/AtencionPage'
 import DetalleNotificacion from '../pages/subpages/DetalleNotificacion'
 
+ const router = createBrowserRouter([
+  {
+    path: "*",
+    element: <LoginPage />,
+  },
+  {
+    path: "/atencion",
+    id: "atencion",
+    element: <AtencionPage />,
+    handle: {
+      crumb: () => <Link to="/atencion">Atención</Link>,
+    },
+  },
+  {
+    path: "/CarpetaCiudadana",
+    id: "CarpetaCiudadana",
+    element: <ServicesPage />,
+    handle: {
+      crumb: () => <Link to="/CarpetaCiudadana">Carpeta Ciudadana</Link>,
+    },
+  },
+  {
+    path: "/AtencionEInformacion/Catalogo",
+    id: "Catalogo",
+    element: <Catalogo />,
+    handle: {
+      crumb: () => <Link to="/AtencionEInformacion/Catalogo">Catálogo</Link>,
+    },
+  },
+  {
+    path: "/AtencionEInformacion/Quejas",
+    id: "Quejas",
+    element: <Quejas />,
+    handle: {
+      crumb: () => <Link to="/AtencionEInformacion/Quejas">Quejas</Link>,
+    },
+  },
+  {
+    path: "/AtencionEInformacion/Tablon",
+    id: "Tablon",
+    element: <Tablon />,
+    handle: {
+      crumb: () => <Link to="/AtencionEInformacion/Tablon">Tablón</Link>,
+    },
+  },
+  {
+    path: "/AtencionEInformacion/Verificacion",
+    id: "Verificacion",
+    element: <Verificacion />,
+    handle: {
+      crumb: () => (
+        <Link to="/AtencionEInformacion/Verificacion">Verificación</Link>
+      ),
+    },
+  },
+  {
+    path: "/CarpetaCiudadana/MisDocumentos",
+    id: "MisDocumentos",
+    element: <MisDocumentos/>,
+    handle: {
+      crumb: () => (
+        <Link to="/CarpetaCiudadana/MisDocumentos">Mis Documentos</Link>
+      ),
+    },
+  },
+  {
+    path: "/CarpetaCiudadana/MisExpedientes",
+    id: "MisExpedientes",
+    element: <MisExpedientes />,
+    handle: {
+      crumb: () => (
+        <Link to="/CarpetaCiudadana/MisExpedientes">Mis Expedientes</Link>
+      ),
+    },
+  },
+  {
+    path: "/CarpetaCiudadana/MisNotificaciones",
+    id: "MisNotificaciones",
+    element: <MisNotificaciones />,
+    handle: {
+      crumb: () => (
+        <Link to="/CarpetaCiudadana/MisNotificaciones">Mis Notificaciones</Link>
+      ),
+    },
+  },
+  {
+    path: "/CarpetaCiudadana/MisSolicitudes",
+    id: "MisSolicitudes",
+    element: <MisSolicitudes />,
+    handle: {
+      crumb: () => (
+        <Link to="/CarpetaCiudadana/MisSolicitudes">Mis Solicitudes</Link>
+      ),
+    },
+  },
+  {
+    path: "/MisNotificaciones/:id",
+    id: ":id",
+    element: <DetalleNotificacion/>,
+    handle: {
+      crumb: () => <Link to="/MisNotificaciones/:id">:id</Link>,
+    },
+  },
+]);
 
-function AppRouter() {
-  return (
-        <Routes>
-            <Route path='/atencion' id='atencion' element={<AtencionPage/>}/> 
-            <Route path='*' element={<LoginPage/>}/> 
-            <Route path='/CarpetaCiudadana' id='CarpetaCiudadana' element={<ServicesPage/>}/> 
-            <Route path='/AtencionEInformacion/Catalogo' id='Catalogo' element={<Catalogo/>}/>
-            <Route path='/AtencionEInformacion/Quejas' id='Quejas' element={<Quejas/>}/>
-            <Route path='/AtencionEInformacion/Tablon' id='Tablon' element={<Tablon/>}/>
-            <Route path='/AtencionEInformacion/Verificacion' id='Verificacion' element={<Verificacion/>}/>
-            <Route path='/CarpetaCiudadana/MisDocumentos' id='MisDocumentos' element={<MisDocumentos/>}/>
-            <Route path='/CarpetaCiudadana/MisExpedientes' id='MisExpedientes' element={<MisExpedientes/>}/>
-            <Route path='/CarpetaCiudadana/MisNotificaciones' id='MisNotificaciones' element={<MisNotificaciones/>}/>
-            <Route path='/CarpetaCiudadana/MisSolicitudes' id='MisSolicitudes' element={<MisSolicitudes/>}/>
-            <Route path="/MisNotificaciones/:id" id=':id' element={<DetalleNotificacion/>}/>
-        </Routes>
-  )
-}
 
-export default AppRouter
+
+
+
+
+export default router

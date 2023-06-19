@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, unstable_HistoryRouter } from 'react-router-dom';
+import { Link, unstable_HistoryRouter, useMatches } from 'react-router-dom';
 import { clearBreadcrumbs } from '../../../../store/user/slices/breadcrumbs/breadcrumbSlice';
 import futufirma from '../../../utils/futufirma';
 import { getLoginUser, setLogoutUser } from '../../../../store/user/slices/user/userSlice';
@@ -59,6 +59,13 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
 
 
 
+  let matches=useMatches();
+  let crumbs=matches
+    // first get rid of any matches that don't have handle and crumb
+    .filter((match) => Boolean(match.handle?.crumb))
+    // now map them into an array of elements, passing the loader
+    // data to each one
+    .map((match) => match.handle.crumb(match.data));
 
   const breadcrumbs = useSelector((state) => state.breadcrumbs);
 
@@ -71,16 +78,11 @@ futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC 
       
      
       <nav className="w-full pl-32">
-        <ol>
-          {breadcrumbs.map((item, index) => (
-            <span key={index}>
-              <Link to={item.path} className="text-gray-300 hover:text-gray-500">
-                {item.ubi}
-              </Link>
-              {index < breadcrumbs.length - 1 && <span className="text-gray-300 mx-2">/</span>}
-            </span>
-          ))}
-        </ol>
+      <ol>
+        {crumbs.map((crumb, index) => (
+          <li key={index}>{crumb}</li>
+        ))}
+      </ol>
       </nav>
         <div className=' flex  items-center'>
         {isLoading?(
