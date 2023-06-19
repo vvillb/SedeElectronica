@@ -126,7 +126,7 @@ function checkAcuse(){
   )
 
   //un use Effect que se lanza cuando llegue la notificacion y haga el fetch del adjunto
-
+  //añadimos un if para que solo haga el fetching si existe el id Adjunto
   useEffect(()=>{
     if (idAdj){fetchAdjunto();
     console.log('idAdj',idAdj)

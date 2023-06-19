@@ -6,14 +6,13 @@ import { getLoginUser, setLogoutUser } from '../../store/user/slices/user/userSl
 
 
 
-import { Button  as DevButton } from 'devextreme-react';
-// import RegisterForm from '../plugins/common/registerForm';
+import { Button  as DevButton, LoadIndicator } from 'devextreme-react';
 import { addBreadcrumbs, clearBreadcrumbs } from '../../store/user/slices/breadcrumbs/breadcrumbSlice';
 
 function LoginPage() {
   
   // const {user} = useSelector(state => state.user);
-  const {  autenticado,user } = useSelector((state) => state.user)
+  const {  autenticado,user,isLoading} = useSelector((state) => state.user)
 
   const dispatch = useDispatch();
 
@@ -46,12 +45,10 @@ function LoginPage() {
   }
 
   const autenticar = (datos) => { 
-
-    console.log('usuario:', user.nombre)
     futufirma.onRespuesta = futufirmaAutenticacionRecibida;
     futufirma.autenticar();    
     dispatch(getLoginUser(datos.certificadoFirma, datos.firma))
-    console.log('usuario:', user.nombre)
+    
    
   }
   const logout = () => {
@@ -70,49 +67,43 @@ function LoginPage() {
   futufirma.debug = true;
   futufirma.emisoresReconocidos = ["FUTUVER SUBCA 001","FUTUVER SUBCA 001-18","AC Componentes Informáticos","AC FNMT Usuarios","AC DNIE 004","AC DNIE 005","AC DNIE 006"];
  /*  version() */
-
+ 
   return (
+
+   
     <Layout>
       <>
         <div>
-        <span>
-          {autenticado?`Hola, ${user.nombre}!`:"Para acceder con futufirma debes autenticarte"}
-        </span>
-        <div>
-          {autenticado?(
-            <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={logout}>
-            Logout
-            </DevButton> 
+        
+        
+        {isLoading?(
+            <LoadIndicator id="large-indicator" height={60} width={60} />
           ):(
-            <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={ autenticar}>
-            Autenticarse
-            </DevButton> 
+            <div>
+            
+            <div>
+            <div>
+                {autenticado?`Hola, ${user.nombre}!`:"Para acceder con futufirma debes autenticarte"}
+            </div>
+              {autenticado?(
+                <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={logout}>
+                Logout
+                </DevButton> 
+              ):(
+                <DevButton className='mt-4 px-6 flex flex-end' type='default'  onClick={ autenticar}>
+                Autenticarse
+                </DevButton> 
+              )}
+              </div>
+              </div>
           )}
+       
           </div>
+          
          
         
         
-          </div>
-        {/* <div className="relative py-3 sm:w-96 mx-auto text-center">
-          
-          <RegisterForm/>
-          <span className="text-2xl font-light ">Login to your account</span>
-          <div className="mt-4 text-left dx-card">
-            <div className="h-2 dx-theme-accent-as-background-color rounded-t-md"></div>
-            <div className="px-8 py-6 dx-theme-border-color-as-background-color">
-              <label className="block"> Usuario </label>
-              {/* <input type="text" placeholder="Email" className="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"/> 
-              <TextBox placeholder='Email' className="dx-field"/>
-              <label className="block mt-3"> Contraseña </label>
-              <TextBox type="password" placeholder="Password" className="dx-field"/>
-                <div className="flex justify-between items-baseline">
-                    {/*<button type="submit" className="mt-4 bg-slate-500 text-white py-2 px-6 rounded-md hover:bg-slate-600 ">Login</button> 
-                 {/*<DevButton text="Login" className='mt-4 px-6' type='default' />
-                  <a href="#" className="text-sm hover:underline">Contraseña olvidada?</a>
-                </div>
-            </div>
-        
-      </div> */}
+   
 </>
     </Layout>    
   )
